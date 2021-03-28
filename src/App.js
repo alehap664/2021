@@ -10,6 +10,9 @@ function App() {
         <Route path="/" component={Home} />
         <Route path="/cinema" component={Cinema} />
         <Route path="/admin" component={Admin} />
+        
+        <Route path="/react-cinema/cinema" component={Cinema} />
+        <Route path="/react-cinema/admin" component={Admin} />
       </Switch>
     </Router>
   );
@@ -18,7 +21,7 @@ function App() {
 const Home = () => {
   return(
     <div>
-      <a href="/cinema" className="text-light">Link to Cinema</a>
+      <a href="/react-cinema/cinema" className="text-light">Link to Cinema</a>
     </div>
   )
 }
