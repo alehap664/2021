@@ -7,7 +7,7 @@ function App() {
   return (
     <Router>
       <Switch>
-        <Route path="/" exact component={Cinema} />
+        <Route path="/" component={Home} />
         <Route path="/cinema" component={Cinema} />
         <Route path="/admin" component={Admin} />
       </Switch>
@@ -17,7 +17,9 @@ function App() {
 
 const Home = () => {
   return(
-    <Redirect to="/cinema" />
+    <div>
+      <a href="/cinema" className="text-light">Link to Cinema</a>
+    </div>
   )
 }
 
