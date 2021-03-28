@@ -7,10 +7,10 @@ function App() {
   return (
     <Router>
       <Switch>
-        <Route path="/" component={Home} />
+        <Route path="/" exact component={Home} />
         <Route path="/cinema" component={Cinema} />
         <Route path="/admin" component={Admin} />
-        
+
         <Route path="/react-cinema/cinema" component={Cinema} />
         <Route path="/react-cinema/admin" component={Admin} />
       </Switch>
