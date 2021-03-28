@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect } from "react";
 import axios from 'axios';
 
 import { Link } from "react-router-dom";
@@ -14,7 +14,6 @@ const Nav = () => {
   const categories = useSelector(state => state.categories);
   const dispatch = useDispatch();
 
-  // const [category, setCategory] = useState([])
   useEffect(() => {
     (async () => {
       const getData = async (url) => {

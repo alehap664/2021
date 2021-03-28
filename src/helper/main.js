@@ -99,8 +99,43 @@ const Carousel = (() =>{
   }
 })();
 
+// Toggle Tab
+const Tab = (() => {
+  const $ = document.querySelector.bind(document);
+  const $$ = document.querySelectorAll.bind(document);
+  let label;
+
+  const setLabel = item => {
+    label = item
+  }
+  return {
+    changeTab: (id, label) => {
+      const tabLabels = $$(".content__tabs .tab");
+      const tabPanels = $$(".tab--panel");
+      const panelSelected = $(`.tab--panel#${id}`);
+      const labelSelected = $(`.tab#${id}`);
+  
+      tabLabels.forEach( ele => ele.classList.remove("tab--active"));
+      tabPanels.forEach( ele => ele.classList.remove("active"));
+  
+      labelSelected.classList.add("tab--active");
+      panelSelected.classList.add("active");
+
+      setLabel(label)
+    },
+    dropdownContent: () => {
+      const btn = $(".content__mobile--btn");
+      const dropdown = $(".content__mobile--dropdown");
+      btn.classList.toggle("content__mobile--btn--active");
+      dropdown.classList.toggle("content__mobile--dropdown--active")
+    },
+    getLabel: () => {
+      return label;
+    }
+  }
+})()
 
 
 export {
-  Carousel
+  Carousel, Tab
 }

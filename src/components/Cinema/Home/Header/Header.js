@@ -21,10 +21,10 @@ const Header = () => {
     (async () => {
       const getData = async () => {
         const res = await axios.get("http://localhost:5000/api/v.1/films");
-        return res.data[0];
+        return res.data;
       }
       const res = await getData();
-      const data = Array(15).fill(res);
+      const data = [...res.slice(0,5), ...res.slice(0,5), ...res.slice(0,5)];
       setImg(data);
 
       const carousel = $("._carousel .card-carousel");
@@ -32,8 +32,6 @@ const Header = () => {
       const cards = $$("._carousel .card__wrap");
       const btnPre = $("._carousel .btn--pre");
       const btnNext = $("._carousel .btn--next");
-      
-      console.log(cardWrap);
 
       Carousel.setCarouselArea(carousel);
       Carousel.setBlockWrapElement(cardWrap);
@@ -91,7 +89,7 @@ const Header = () => {
                   return(
                     <Card to={`${path}/detail/${ele.id}` || "#"}
                       title={ele.film__title} 
-                      category={ele.film__category || []} key={index}
+                      categories={ele.film__categories || []} key={index}
                       image={ele.film__cover}
                       rate={index}
                     />

@@ -1,24 +1,14 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { FaPlay } from "react-icons/fa";
+
 const Detail = ({film}) => {
   console.log(film);
-  const render = (key) => {
-    (key || []).map( (ele, index) => (
+  const render = key => {
+    return key.map( (ele, index) => (
       <span key={index}>{ele}</span>
     ))
   }
-
-  useEffect( () => {
-    const render = (key) => {
-      console.log(key);
-      if (!key) return;
-      key.map( (ele, index) => (
-        <span key={index}>{ele}</span>
-      ))
-    }
-  }, [])
-
   return (
     <section className="section section--details">
        <div className="header__bg--wrap">
@@ -54,46 +44,30 @@ const Detail = ({film}) => {
 
                 <div className="col-12 col-md-8 col-lg-9 col-xl-7">
                   <div className="card__content">
-                    <ul className="card__detail m-0">
+                    <ul className="card__detail">
                       <li>
                         <span>Director:</span>
-                        { 
-                          (film.film__director || []).map( (ele, index) => (
-                            <span key={index}>{ele}</span>
-                          ))
-                        }
+                        { render(film.film__director) }
                       </li>
                       <li>
                         <span>Cast:</span>
-                        { 
-                          (film.film__cast || []).map( (ele, index) => (
-                            <span key={index}>{ele}</span>
-                          ))
-                        }
+                        { render(film.film__cast) }
                       </li>
                       <li>
                         <span>Category:</span>
-                        { 
-                          (film.film__category || []).map( (ele, index) => (
-                            <span key={index}>{ele}</span>
-                          ))
-                        }
+                        { render(film.film__categories) }
                       </li>
                       <li>
                         <span>Release year:</span>
-                        <span>{film.film__release}</span>
+                        <span className="text-light">{film.film__release}</span>
                       </li>
                       <li>
                         <span>Running time:</span>
-                        <span>{film.film__running}</span>
+                        <span className="text-light">{film.film__running}</span>
                       </li>
                       <li>
-                        <span>Category:</span>
-                        { 
-                          (film.film__country || []).map( (ele, index) => (
-                            <span key={index}>{ele}</span>
-                          ))
-                        }
+                        <span>Country:</span>
+                        { render(film.film__countries) }
                       </li>
                     </ul>
                     <div className="card__description">
@@ -110,9 +84,9 @@ const Detail = ({film}) => {
           </div>
 
           <div className="col-12 col-xl-6">
-            <iframe src={film.film__trailer} width="100%" height="100%" ></iframe>
+            <iframe src={film.film__trailer} width="100%" height="100%" title={film.film__title} ></iframe>
             {/* <video autoPlay="autoplay" controls="controls" width="100%" height="100%"> 
-                <source src="https://www.googleapis.com/drive/v3/files/1ItxrflhSErBYx1j2ehFXq0OpBHTNdkiH?alt=media&key=AIzaSyCtPEz4SHnmWA7H2HDgMb5LOCnqPtyLYGM" type="video/mp4" />
+                <source src="https://www.googleapis.com/drive/v3/files/1O1ANl0Fp8g9IX6rArP_Tqxh4STad2gFR?alt=media&key=AIzaSyCtPEz4SHnmWA7H2HDgMb5LOCnqPtyLYGM" type="video/mp4" />
             </video> */}
           </div>
         </div>

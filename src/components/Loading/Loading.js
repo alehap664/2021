@@ -1,12 +1,14 @@
-import React from 'react'
+import React from 'react';
 
 const Loading = () => {
   return (
-    <section class="header _carousel">
-      <div class="container">
-        <div class="row">
-          <div class="col-12">
-            <h1>LOADING</h1>
+    <section className="header loading">
+      <div className="container">
+        <div className="row">
+          <div className="col-12">
+            <div className="loading__alert">
+              <div className="loading__loader"></div>
+            </div>
           </div>
         </div>
       </div>

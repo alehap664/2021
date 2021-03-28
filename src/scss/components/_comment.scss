@@ -1,0 +1,156 @@
+%author{
+  position: relative;
+  padding-left: 60px;
+  margin-bottom: 20px;
+}
+%avatar{
+  position: absolute;
+  width: 40px;
+  left: 0;
+}
+%text{
+  padding: 20px;
+  border: 1px solid #{$gray};
+  border-radius: .5rem;
+}
+%action{
+  padding: 10px 20px;
+  border: 1px solid #{$gray};
+  border-radius: .5rem;
+  border-top: none;
+}
+%button{
+  padding: 0;
+  border: none; 
+  outline: none;
+  background-color: inherit;
+  color: white;
+  opacity: .8;
+  transition: .4s all ease;
+  &:hover{
+    opacity: 1;
+  }
+}
+
+.comments{
+  height: 40px;
+  color: white;
+  &__item{
+    margin-bottom: 20px;
+
+    &.--answer{
+      margin-left: 40px;
+    }
+  }
+  &__author{
+    @extend %author;
+  }
+  &__avatar{
+    @extend %avatar;
+  }
+  &__name{
+    height: 20px;
+  }
+  &__time{
+    margin-top: 2px;
+    height: 18px;
+    font-size: 12px;
+    color: #{gray};
+  }
+  &__text{
+    @extend %text;
+  }
+  &__action{
+    @extend %action;
+    @include d-flex(row, nowrap, "", center);
+    &>button{
+      @extend %button;
+      &>svg{
+        font-size: 12px;
+        margin-right: 5px;
+      }
+    }
+    &>button:nth-child(2){
+      margin-left: auto;
+      margin-right: 15px;
+    }
+    
+  }
+  &__rate{
+    button{
+      @extend %button;
+      margin-right: 15px;
+    }
+    svg{
+      margin-right: 5px;
+    }
+
+    button:first-child{
+      svg{
+        color: green;
+      }
+    }
+    button:last-child{
+      svg{
+        color: red;
+      }
+    }
+  }
+}
+.reviews{
+  height: 40px;
+  color: white;
+  &__item{
+    margin-bottom: 20px;
+  }
+  &__avatar{
+    @extend %avatar;
+  }
+  &__author{
+    @extend %author;
+    padding-right: 60px;
+  }
+  &__rating{
+    @include d-flex("", "", center, center);
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    width: 40px;
+    height: 40px;
+
+    border: 2px solid transparent;
+    border-radius: 50%;
+
+    &.--red{
+      border-color: red;
+    }
+    &.--orange{
+      border-color: #{$orange};
+    }
+    &.--green{
+      border-color: green;
+    }
+    
+  }
+  &__name{
+    height: 20px;
+  }
+  &__time{
+    margin-top: 2px;
+    height: 18px;
+    font-size: 12px;
+    color: #{gray};
+  }
+  &__text{
+    @extend %text;
+  }
+}
+
+.photos{
+  img{
+    vertical-align: middle;
+    margin-bottom: 20px;
+    border-radius: .5rem;
+  }
+}

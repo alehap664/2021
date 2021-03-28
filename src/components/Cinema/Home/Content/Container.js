@@ -10,16 +10,16 @@ const Container = () => {
     rate: "10"
   })
   const arr = [
-    {id: "tab-1", data},
-    {id: "tab-2", data},
-    {id: "tab-3", data},
-    {id: "tab-4", data}
+    {id: "tab-new", data},
+    {id: "tab-movie", data},
+    {id: "tab-tv", data},
+    {id: "tab-cartoon", data}
   ]
   return (
     <div className="container">
       <div className="tab--content">
         {arr.map( (tab, index) => (
-          <div className={`tab--panel ${tab.id === "tab-1" ? "active" : ""}`} id={tab.id} key={index}>
+          <div className={`tab--panel ${index === 0 ? "active" : ""}`} id={tab.id} key={index}>
             <div className="row">
               {tab.data.map( (card, index) => (
                 <div className="col-6 col-sm-4 col-md-3 col-xl-2 p-0" key={index}>
@@ -36,7 +36,6 @@ const Container = () => {
           </div>
         ))}
       </div>
-
     </div>
   )
 }

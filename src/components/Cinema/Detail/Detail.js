@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios'
-import Header from './Header/Header';
+import Loading from '../../Loading/Loading';
+import Header from './Header';
+import Section from './Section/Section';
 
 const Detail = () => {
   const param = useParams();
-  const [film, setFilm] = useState([]);
+  const [film, setFilm] = useState({});
 
   useEffect(() => {
     (async () => {
@@ -18,12 +20,12 @@ const Detail = () => {
     })()
   }, [])
 
-  console.log(param);
-  console.log(film);
   return (
-    <article>
+    !Object.keys(film)[0] ? <Loading /> : 
+    <>
       <Header film={film} />
-    </article>
+      <Section film={film} />
+    </>
   )
 }
 

@@ -65,13 +65,13 @@ const Book = () => {
     }
     return toggle[key]
   }
-  const toggleSetTempName = (key) => {
-    const toggle = {
-      country: setTemp_countries,
-      category: setTemp_categories
-    }
-    return toggle[key]
-  }
+  // const toggleSetTempName = (key) => {
+  //   const toggle = {
+  //     country: setTemp_countries,
+  //     category: setTemp_categories
+  //   }
+  //   return toggle[key]
+  // }
 
   const dropDown = (key) => {
     const temp_select = { ...select };
@@ -98,7 +98,7 @@ const Book = () => {
       return false
     })
 
-    result = result == 0 ? [{[key]: "No result found"}] : result
+    result = !result[0] ? [{[key]: "No result found"}] : result
     setter(result);
   };
   
@@ -243,7 +243,7 @@ const Book = () => {
 
     const formData = {};
     
-    const listField = [
+    [
       ...selectID.map( ele => (
         {
           id: ele,

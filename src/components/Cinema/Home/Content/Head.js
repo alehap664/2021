@@ -1,36 +1,23 @@
-import React,{useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import { Link } from "react-router-dom";
+import { Tab } from "../../../../helper/main";
 
 const Head = () => {
-  const $ = document.querySelector.bind(document);
-  const $$ = document.querySelectorAll.bind(document);
+  const {changeTab, dropdownContent, getLabel} = Tab;
+  const [label, setLabel] = useState("")
 
-  const [tabLabel, setTabLabel] = useState("NEW RELEASES");
-  
-  const dropdownContent = () => {
-    const btn = $(".content__mobile--btn");
-    const dropdown = $(".content__mobile--dropdown");
-    btn.classList.toggle("content__mobile--btn--active");
-    dropdown.classList.toggle("content__mobile--dropdown--active")
-  }
+  const tabData = [
+    { id: "tab-new", label: "NEW RELEASES" },
+    { id: "tab-movie", label: "MOVIES" },
+    { id: "tab-tv", label: "SERIES" },
+    { id: "tab-cartoon", label: "CARTOONS" }
+  ]
 
-  const changeTab = (e) => {
-    const label = e.target.innerHTML;
-    const id = e.target.id;
+  useEffect(() => {
+    changeTab("tab-new", "NEW RELEASES");
+    setLabel(getLabel());
+  }, [])
 
-    const tabLabels = $$(".content__tabs .tab");
-    const tabPanels = $$(".tab--panel");
-    const panelSelected = $(`.tab--panel#${id}`);
-    const labelSelected = $(`.tab#${id}`);
-
-    tabLabels.forEach( ele => ele.classList.remove("tab--active"));
-    tabPanels.forEach( ele => ele.classList.remove("active"));
-
-    labelSelected.classList.add("tab--active");
-    panelSelected.classList.add("active");
-
-    setTabLabel(label);
-  }
   return (
     <div className="content__head">
       <div className="container">
@@ -38,23 +25,31 @@ const Head = () => {
           <div className="col-12">
             <h2 className="content__title">New items</h2>
             <ul className="content__tabs">
-              <li><Link to="#" id="tab-1" className="tab tab--active" onClick={changeTab}>NEW RELEASES</Link></li>
-              <li><Link to="#" id="tab-2" className="tab" onClick={changeTab}>MOVIES</Link></li>
-              <li><Link to="#" id="tab-3" className="tab" onClick={changeTab}>TV SERIES</Link></li>
-              <li><Link to="#" id="tab-4" className="tab" onClick={changeTab}>CARTOONS</Link></li>
+              {tabData.map( (ele, index) => (
+                <li key={ele.id}>
+                  <Link 
+                    to="#" id={ele.id} className={`tab ${index === 0 ? "tab--active" : ""}`}
+                    onClick={() => {changeTab(ele.id, ele.label)}} >{ele.label}
+                  </Link>
+                </li>
+              ))}
             </ul>
 
             <div className="content__mobile">
               <div className="content__mobile--btn" onClick={dropdownContent}>
-                <input type="button" value={tabLabel} />
+                <input type="button" value={label} />
                 <span></span>
               </div>
               <div className="content__mobile--dropdown">
                 <ul className="content__mobile--nav">
-                  <li><Link to="#" id="tab-1" onClick={(e) => { changeTab(e); dropdownContent() }}>NEW RELEASES</Link></li>
-                  <li><Link to="#" id="tab-2" onClick={(e) => { changeTab(e); dropdownContent() }}>MOVIES</Link></li>
-                  <li><Link to="#" id="tab-3" onClick={(e) => { changeTab(e); dropdownContent() }}>TV SERIES</Link></li>
-                  <li><Link to="#" id="tab-4" onClick={(e) => { changeTab(e); dropdownContent() }}>CARTOONS</Link></li>
+                  {tabData.map( (ele, index) => (
+                    <li key={ele.id}>
+                      <Link 
+                        to="#" id={ele.id} className={`tab ${index === 0 ? "tab--active" : ""}`}
+                        onClick={() => {changeTab(ele.id, ele.label)}} >{ele.label}
+                      </Link>
+                    </li>
+                  ))}
                 </ul>
               </div>
             </div>
