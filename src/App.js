@@ -11,6 +11,7 @@ function App() {
         <Route path="/cinema" component={Cinema} />
         <Route path="/admin" component={Admin} />
 
+        <Route path="/react-cinema" exact component={Home} />
         <Route path="/react-cinema/cinema" component={Cinema} />
         <Route path="/react-cinema/admin" component={Admin} />
       </Switch>
