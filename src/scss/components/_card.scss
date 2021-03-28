@@ -1,0 +1,214 @@
+.card-carousel{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  height: auto;
+
+  position: relative;
+  overflow: hidden;
+  
+  &__outer{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    height: auto;
+  }
+  &__inter{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+  }
+}
+
+.card{
+  background-color: transparent !important;
+  border: none !important;
+  &__wrap{
+    margin-top: 30px;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  &__cover{
+    position: relative;
+    background-color: #{$black};
+
+    img{
+      width: 100%;
+      transition: opacity 0.5s;
+    }
+    &:hover{
+      img{
+        opacity: 0.4;
+      }
+      .card__play{
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+      }
+    }
+  }
+  &__play{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    opacity: 0;
+    transition: 0.5s;
+    transform: translate(-50%, -50%) scale(0.9);
+
+    width: 54px;
+    height: 54px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    color: #{$orange} !important;
+    background-color: rgba(255,255,255,0.2);
+    border: 6px solid rgba(255,255,255,0.15);
+    border-radius: 50%;
+
+    font-size: 1.2rem;
+
+    &:hover{
+      border-color: #{$orange};
+    }
+  }
+  &__rate{
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+
+    width: 36px;
+    height: 36px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 50%;
+    border: 2px solid transparent;
+    background-color: rgba(26, 25, 31, .7);
+    color: white;
+
+    &--red{
+      border-color: red;
+    }
+    &--yellow{
+      border-color: yellow;
+    }
+    &--green{
+      border-color: green;
+    }
+  }
+  &__content{
+    margin-top: 1rem;
+    margin-bottom: .5rem;
+  }
+  &__title{
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    margin-bottom: 0px !important;
+    line-height: 1;
+    font-weight: 400;
+    margin-bottom: .5rem !important;
+    @include hover("a", white, $orange)
+  }
+  &__category{
+    line-height: 1;
+    &__item{
+      position: relative;
+      margin-right: .5rem;
+
+      color: #{$orange} !important;
+      opacity: 0.8;
+      font-size: 14px;
+      
+      &:hover{
+        opacity: 1;
+      }
+
+      &:not(:last-child)::before{
+        @include pseudo(",");
+        left: 100%;
+        bottom: 0;
+        transform: translate(0,-20%);
+        color: #{$orange};
+      }
+    }
+  }
+  
+}
+.card--details{
+  .card{
+    &__watch{
+      display: flex !important;
+      justify-content: center;
+      align-items: center;
+  
+      max-width: 250px;
+  
+      margin-top: 1rem;
+      text-decoration: none;
+      color: white;
+    }
+    &__cover{
+      max-width: 250px;
+    }
+    &__content{
+      margin-top: 0rem;
+      margin-bottom: 0rem;
+    }
+    &__detail{
+      li{
+        @include d-flex(row, wrap, "", center);
+        span{
+          margin-right: 0.5rem;
+          position: relative;
+        }
+        span:not(:first-child){
+          color: #{$orange};
+          &:not(:last-child)::after{
+            @include pseudo(",");
+            margin-top: 2px;
+            top: 0%;
+            left: 100%;
+          }
+        }
+      }
+    }
+    &__description{
+      margin-top: 1rem;
+      padding: 15px 20px;
+      background-color: #{$gray};
+      overflow: hidden;
+      &--scroll{
+        max-height: 160px;
+        overflow: auto;
+        @include screen("Ipad"){
+          max-height: 170px;
+        }
+        @include screen("Ipad-large"){
+          max-height: 180px;
+        }
+        @include screen("Laptop"){
+          max-height: 140px;
+        }
+
+        &::-webkit-scrollbar {
+          width: 5px !important;
+        }
+  
+        &::-webkit-scrollbar-thumb {
+          background-color: #{$orange};
+          border-radius: 10px;
+        }
+  
+        &::-webkit-scrollbar-track {
+          width: 5px;
+          background-color: black;
+        }
+      }
+      &--text{
+        padding-right: 20px;
+      }
+    }
+  }
+}

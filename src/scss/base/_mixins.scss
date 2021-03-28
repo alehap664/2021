@@ -1,0 +1,43 @@
+@mixin hover($class, $color, $hoverColor) {
+  #{$class}{
+    cursor: pointer;
+    color:#{$color};
+    &:hover{
+      color: #{$hoverColor};
+    }
+  }
+}
+
+
+@mixin pseudo($content: '', $display: block, $pos: absolute ){
+  content: $content;
+  display: $display;
+  position: $pos;
+}
+
+@mixin d-flex($direc: "", $wrap: "", $jus: "", $align: "") {
+  display: flex;
+  @if (#{$direc} != "") {
+    flex-direction: #{$direc};
+  };
+  @if (#{$wrap} != "") {
+    flex-wrap: #{$wrap};
+  };
+  @if (#{$jus} != "") {
+    justify-content: #{$jus};
+  };
+  @if (#{$direc} != "") {
+    align-items: #{$align};
+  };
+}
+@mixin screen($width, $type: min) {
+    @if map_has_key($breakpoints, $width) {
+        $width: map_get($breakpoints, $width);
+        @if $type == max {
+            $width: $width - 1px;
+        }
+        @media only screen and (#{$type}-width: $width) {
+            @content;
+        }
+    }
+}

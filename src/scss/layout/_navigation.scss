@@ -1,0 +1,335 @@
+.navigation {
+  background-color: #{$black};
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 999999;
+}
+
+.text-size-2rem{
+  font-size: 1.5rem !important;
+  transition: all ease .4s;
+}
+
+.nav-bar {
+  height: 80px;
+  display: flex;
+  align-items: center;
+  position: relative;
+
+  &__logo{
+    width: 100%;
+  }
+}
+
+.nav{
+  &.active{
+    transform: translate(0%, 0%);
+  }
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap !important;
+  width: 250px;
+  height: 100vh;
+  position: fixed;
+  top: 80px;
+  right: 0%;
+  z-index: 9999999;
+  transform: translate(100%, 0%);
+  transition: all ease 0.4s;
+  padding: 30px !important;
+  background-color: #{$black};
+  // Responsive
+  @include screen("Laptop"){
+    width: auto;
+    height: 100%;
+    position: unset;
+    flex-direction: row;
+    padding: 0px !important;
+    transform: translate(0,0);
+    transition: unset;
+    margin-left: auto !important;
+  }
+  &__item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+    // Responsive
+    @include screen("Laptop"){
+      padding: 0 10px;
+      margin-bottom: 0px;
+    }
+  }
+
+  &--label {
+    cursor: pointer;
+    text-decoration: none !important;
+    text-transform: uppercase;
+    color: white !important;
+    transition: all ease 0.2s;
+    font-size: .9rem;
+
+    &:hover {
+      color: #{$orange} !important;
+    }
+  }
+
+  &__dropdown {
+    position: relative;
+
+    &--wrap {
+      visibility: hidden;
+      opacity: 0;
+      transition: all ease 0.4s;
+      position: absolute;
+      top: 100%;
+      background-color: #{$gray};
+      padding: 10px;
+      margin-top: 10px;
+      height: 224px;
+      z-index: 99999;
+      // Responsive
+      @include screen("Laptop"){
+        width: 200px;
+        height: 200%;
+        margin-top: 0px;
+      }
+
+      &.active {
+        visibility: visible;
+        opacity: 1;
+        
+      }
+    }
+
+    &--scroll {
+      width: 100%;
+      max-height: 100%;
+      overflow: auto;
+
+      &::-webkit-scrollbar {
+        width: 5px !important;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background-color: #{$orange};
+        border-radius: 10px;
+      }
+
+      &::-webkit-scrollbar-track {
+        width: 5px;
+        background-color: black;
+      }
+    }
+
+    &__item {
+      color: white;
+      display: flex;
+      align-items: center;
+      line-height: 1 !important;
+      cursor: pointer;
+      
+      a{
+        width: 100%;
+        padding: 10px;
+      }
+      &:hover {
+        color: #{$orange};
+      }
+    }
+  }
+
+  &__lang{
+    margin-left: 1rem;
+    .nav__item{
+      margin-bottom: 0px;
+    }
+  }
+
+  &__form{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    transform: translate(0, -100%);
+    display: flex;
+    align-items: center;
+    background-color: #{$black};
+    transition: all ease 0.4s;
+    // Responsive
+    @include screen("Laptop"){
+      position: unset;
+      width: 200px;
+      transform: translate(0, 0%);
+      .grp-inp{
+        position: relative;
+      }
+    }
+    .grp-inp{
+      width: 100%;
+      height: 50%;
+    }
+
+    &.active{
+      transform: translate(0, 0%);
+    }
+  }
+
+  &__search {
+    position: absolute;
+    width: 100%;
+    height: 40px !important;
+    color: white !important;
+    border-radius: .4rem !important;
+    background-color: #{$gray} !important;
+    border: 2px solid transparent;
+    outline: none;
+    padding-left: 20px;
+    padding-right: 80px;
+
+    &::placeholder {
+      color: white !important;
+    }
+    &:focus {
+      border-color: #{$orange};
+    }
+
+    // Responsive
+    @include screen("Laptop"){
+      position: absolute;
+      width: 200px;
+      padding-right: 40px;
+    }
+  }
+
+  &__btn{
+    line-height: 1;
+    color: white;
+    border: 1px solid transparent;
+    background-color: transparent;
+    outline: none;
+    height: 40px;
+    
+    &--search{
+      width: 40px;
+      position: absolute;
+      right: 40px;
+    }
+    &--close{
+      width: 40px;
+      position: absolute;
+      right: 0px;
+    }
+    &--search2{
+      width: 40px;
+      border-radius: .4rem !important;
+    }
+
+    // Responsive
+    @include screen("Laptop"){
+      &--search{
+        right: 0;
+      }
+      &--close{
+        display: none;
+      }
+      &--search2{
+        display: none;
+      }
+    }
+  }
+
+  &__auth {
+    display: flex;
+    align-items: center;
+    margin-left: 1rem;
+
+    &--btn {
+      border-radius: .4rem !important;
+      padding: 0.5rem 1rem;
+      :nth-child(2){
+        display: none;
+      }
+    }
+  }
+
+  &__burger{
+    margin-left: 1rem;
+    display: flex;
+    align-items: center;
+    @include screen("Laptop"){
+      display: none;
+    }
+    &--wrap{
+      cursor: pointer;
+      padding: 10px;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      flex-flow: column nowrap;
+      justify-content: space-evenly;
+      position: relative;
+    }
+    &--line{
+      position: absolute;
+      width: 50%;
+      transform: rotate(0deg);
+      background-color: white;
+      height: 2px;
+      transition: 0.4s ease;
+    }
+    &--line:nth-child(1){
+      top: 13px;
+    }
+    &--line:nth-child(3){
+      top: 25px;
+    }
+    &--active{
+      .nav__burger--line:nth-child(1){
+        top: 50%;
+        transform: rotate(45deg);
+
+      }
+      .nav__burger--line:nth-child(2){
+        opacity: 0;
+
+      }
+      .nav__burger--line:nth-child(3){
+        top: 50%;
+        transform: rotate(-45deg);
+
+      }
+    }
+  }
+}
+  
+.wrap {
+  width: 500px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+
+// màn hình điện thoại
+@media (min-width: 576px) {
+  .text-size-2rem{
+    font-size: 2rem !important;
+  }
+  .nav-bar__logo{
+    width: auto;
+  }
+  .nav__auth{
+    &--btn{
+      padding: 0.5rem 2rem !important;
+      :nth-child(1){
+        display: none;
+      }
+      :nth-child(2){
+        display: inline-block;
+      }
+    }
+  }
+}
+

@@ -1,0 +1,51 @@
+%btn-clear{
+  outline: none;
+  border: none;
+}
+%border{
+  border: 2px solid #{$orange};
+  border-radius: 0.4rem;
+}
+%btn-square{
+  width: 40px;
+  height: 40px;
+}
+%btn-carousel{
+  display: flex !important;
+  width: auto;
+  height: auto;
+
+  color: #ffffff !important;
+  font-size: 2rem !important;
+  padding: 0 !important;
+
+  opacity: .8;
+  transition: all ease .4s !important;
+  svg{
+    vertical-align: unset !important;
+  }
+  &:hover{
+    opacity: 1;
+  }
+}
+
+.carousel--btn{
+  height: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.btn--pre{
+  @extend %btn-carousel; 
+}
+.btn--next{
+  @extend %btn-carousel;
+  margin-left: .5rem;
+}
+
+.btn-orange{
+  color: #fff !important;
+  border-color: #f9ab00 !important;
+  border-width: 2px !important;
+  border-radius: .4rem !important;
+}

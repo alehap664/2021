@@ -1,0 +1,55 @@
+.sidebar{
+  border: 1px solid $gray;
+  width: 280px;
+  height: 100vh;
+  
+  &_logo{
+    height: 80px;
+    padding: 0px 30px;
+    font-size: 30px;
+
+    border-bottom: 1px solid $gray;
+  }
+
+  &_user{
+    padding: 0px 30px;
+    height: 80px;
+    
+
+    border-bottom: 1px solid $gray;
+    &-avatar{
+      @extend %btn-square;
+      @extend %border;
+      @include d-flex(row, "", center, center);
+      padding: 9px;
+      margin-right: 15px;
+    }
+    &-title{
+      span{
+        font-size: 10px;
+      }
+    }
+    &-btn{
+      @extend %btn-square;
+      @extend %btn-clear;
+      @extend %border;
+      @include d-flex(row, "", center, center);
+      // padding: 12px;
+      color: white;
+      background-color: #{$gray};
+
+    }
+  }
+
+  &_nav{
+    
+    nav{
+      padding: 30px;
+    }
+    &-item{
+      list-style-type: none;
+      margin-bottom: 10px;
+      color: #f9ab00 !important;
+    }
+  }
+}
