@@ -4,13 +4,13 @@ import Home from './Home/Home';
 import Detail from './Detail/Detail';
 
 function Cinema() {
-  const { path } = useRouteMatch();
+  // const { path } = useRouteMatch();
   return (
     <Router>
       <Nav></Nav>
       <Switch>
-        <Route path={path} exact component={Home} />
-        <Route path={`${path}/detail/:id`} exact component={Detail} />
+        <Route path="/cinema" exact component={Home} />
+        <Route path="/detail/:id" exact component={Detail} />
       </Switch>
     </Router>
   );
