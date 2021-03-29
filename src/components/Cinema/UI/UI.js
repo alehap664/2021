@@ -7,7 +7,7 @@ const Card = ({to, title, categories, image, rate}) => {
     <div className="card__wrap">
       <div className="card">
         <div className="card__cover">
-          <img className="card__img" alt="" src={image} />
+          <img className="card__img" alt="" srcSet={image} />
           <Link to={to} className="card__play"><FaPlay className="pl-1"/></Link>
           <span className="card__rate card__rate--red">{rate}</span>
         </div>

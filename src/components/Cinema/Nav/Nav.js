@@ -21,7 +21,7 @@ const Nav = () => {
         return res.data
       }
       if (!categories[0]) {
-        const data = await getData("https://ndthinh-react-cinema.herokuapp.com/films/categories");
+        const data = await getData("https://ndthinh48-react-cinema.herokuapp.com/api/v.1/categories");
         dispatch(addCategories(data));
       }
     })()

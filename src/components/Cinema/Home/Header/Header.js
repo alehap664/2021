@@ -1,6 +1,7 @@
-import React, {useEffect, useState} from 'react';
+import {useEffect, useState} from 'react';
 import {useRouteMatch} from 'react-router-dom';
-import axios from "axios";
+// import Loading from '../../../Loading/Loading.js';
+
 // Helper
 import { Carousel } from "../../../../helper/main.js";
 // UI
@@ -8,61 +9,53 @@ import { Card } from "../../UI/UI";
 // Icon
 import { FaLongArrowAltLeft, FaLongArrowAltRight } from "react-icons/fa";
 
-const Header = () => {
+const Header = ({films}) => {
   const {path} = useRouteMatch();
 
   const $ = document.querySelector.bind(document);
   const $$ = document.querySelectorAll.bind(document);
   const [index, setIndex] = useState(0);
-  
-  const [img, setImg] = useState([]);
 
   useEffect(() => {
-    (async () => {
-      const getData = async () => {
-        const res = await axios.get("http://localhost:5000/api/v.1/films");
-        return res.data;
-      }
-      const res = await getData();
-      const data = [...res.slice(0,5), ...res.slice(0,5), ...res.slice(0,5)];
-      setImg(data);
+    const carousel = $("._carousel .card-carousel");
+    const cardWrap = $("._carousel .card-carousel__outer"); 
+    const cards = $$("._carousel .card__wrap");
+    const btnPre = $("._carousel .btn--pre");
+    const btnNext = $("._carousel .btn--next");
 
-      const carousel = $("._carousel .card-carousel");
-      const cardWrap = $("._carousel .card-carousel__outer"); 
-      const cards = $$("._carousel .card__wrap");
-      const btnPre = $("._carousel .btn--pre");
-      const btnNext = $("._carousel .btn--next");
+    const newCarousel = Carousel();
+    newCarousel.setCarouselArea(carousel);
+    newCarousel.setBlockWrapElement(cardWrap);
+    newCarousel.setElements(cards);
+    newCarousel.setup();
 
-      Carousel.setCarouselArea(carousel);
-      Carousel.setBlockWrapElement(cardWrap);
-      Carousel.setElements(cards);
-      Carousel.setup();
+    window.addEventListener("resize", () => {
+      newCarousel.setup();
+    })
+    btnNext.addEventListener("click", () => {
+      newCarousel.next(1);
+      setIndex(newCarousel.getIndexSlide())
+    });
+    btnPre.addEventListener("click", () => {
+      newCarousel.next(-1);
+      setIndex(newCarousel.getIndexSlide())
+    });
   
-      window.addEventListener("resize", () => {
-        Carousel.setup();
-      })
-      btnNext.addEventListener("click", () => {
-        Carousel.next(1);
-        setIndex(Carousel.getIndexSlide())
-      });
-      btnPre.addEventListener("click", () => {
-        Carousel.next(-1);
-        setIndex(Carousel.getIndexSlide())
-      });
-    })()
-  }, []);
-
+  }, [])
+  
   return (
     <section className="header _carousel">
       <div className="header__bg--wrap">
         <div className="header__bg">
-          {img.map( (ele, i) => (
-            <div 
-              key={i}
-              className={`header__bg--item ${i === index ? "header__bg--active" : ""}`} 
-              style={{"background": `url("${ele.film__bg}") center center / cover no-repeat`}}>
-            </div>
-          ))}
+          {films.map( (film, i) => {
+            return(
+              <div 
+                key={i}
+                className={`header__bg--item ${i === index ? "header__bg--active" : ""}`} 
+                style={{"background": `url("${film.film__bg}") center center / cover no-repeat`}}>
+              </div>
+            )
+          })}
           
         </div>
       </div>
@@ -82,15 +75,16 @@ const Header = () => {
           <div className="col-12 p-0">
             <div className="card-carousel">
               <div className="card-carousel__outer">
-                {img.map( (ele, index) => {
-                  if (ele.category) {
-                    ele.category.length = 3
+                {films.map( (film, index) => {
+                  if (film.film__categories) {
+                    film.film__categories.length = 3
                   }
+                  console.log(film.film__categories);
                   return(
-                    <Card to={`${path}/detail/${ele.id}` || "#"}
-                      title={ele.film__title} 
-                      categories={ele.film__categories || []} key={index}
-                      image={ele.film__cover}
+                    <Card to={`${path}/detail/${film.id}` || "#"}
+                      title={film.film__title} 
+                      categories={film.film__categories || []} key={index}
+                      image={film.film__cover}
                       rate={index}
                     />
                   )

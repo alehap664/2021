@@ -1,3 +1,5 @@
+import axios from "axios";
+
 const Carousel = (() =>{
   const division = carouselWidth => num => carouselWidth / num ;
   const clientWidth = ele => ele.clientWidth;
@@ -7,7 +9,7 @@ const Carousel = (() =>{
     { width: 1200, cardToDisplay: 4 },
   ]
 
-  let Carousel, BlockWrapElement, Elements = null;
+  let Carousel, BlockWrapElement, Elements, Transition = .7;
   let count = 0;
 
   const awaitFor = (time) => {
@@ -57,7 +59,7 @@ const Carousel = (() =>{
     setAnimationFor(BlockWrapElement, logic, time);
 
     if (count >= cardQuantity || count <= -cardQuantity) {
-      await awaitFor(700);
+      await awaitFor(+Transition*1000);
       count = 0;
       logic = cardQuantity * cardWidth;
       setAnimationFor(BlockWrapElement, logic, 0);
@@ -75,6 +77,9 @@ const Carousel = (() =>{
   const setElements = (ele) => {
     Elements = ele;
   }
+  const setTransition = (ele) => {
+    Transition = ele;
+  }
   const getIndexSlide = () => {
     return count >= 0 ? count : getCardQuantity() + count;
   }
@@ -86,18 +91,19 @@ const Carousel = (() =>{
   const next = (num) => {
     const cardWidth = getCardWidth();
     count += num;
-    transform(cardWidth, 0.7);
+    transform(cardWidth, Transition);
   }
 
   return {
     setCarouselArea,
     setBlockWrapElement,
     setElements,
+    setTransition,
     getIndexSlide,
     setup,
     next
   }
-})();
+});
 
 // Toggle Tab
 const Tab = (() => {
@@ -135,7 +141,20 @@ const Tab = (() => {
   }
 })()
 
+// Get data
+/**
+ * 
+ * @param {String} url - URL to get data
+ * @returns data
+ */
+const getData = (url) => {
+  return new Promise((resolve, reject) => {
+    axios.get(url)
+    .then( res => resolve(res))
+    .catch( res => reject(res))
+  })
+}
 
 export {
-  Carousel, Tab
+  Carousel, Tab, getData
 }

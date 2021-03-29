@@ -17,23 +17,12 @@ const Section = ({film}) => {
     { id: "tab-photos", label: "PHOTOS" }
   ]
 
-  const data = Array(18).fill({
-    title: "Ahihi",
-    image: "https://dmitryvolkov.me/demo/hotflix2.1/main/img/covers/cover2.jpg",
-    category: ["a", "b", "c"],
-    rate: "10"
-  })
   const data2 = Array(6).fill({
     title: "Ahihi",
     image: "https://dmitryvolkov.me/demo/hotflix2.1/main/img/covers/cover2.jpg",
     category: ["a", "b", "c"],
     rate: "10"
   })
-  const arr = [
-    {id: "tab-comment", data},
-    {id: "tab-reviews", data},
-    {id: "tab-photos", data},
-  ]
 
   return (
     <section className>
@@ -86,9 +75,13 @@ const Section = ({film}) => {
           </div>
           <div className="col-12 col-lg-4">
             <div className="row">
-              {data2.map( (ele, index) => (
-                <div className="col-6" key={index}>
-                  <Card to="#" title={ele.title} category={ele.category} image={ele.image} rate="10"></Card>
+              {data2.map( ele => (
+                <div className="col-6" key={Math.random()}>
+                  <Card 
+                    to="#" 
+                    title={film.film__title} 
+                    categories={film.film__categories} 
+                    image={film.film__cover} rate="10"></Card>
                 </div>
               ))}
             </div>

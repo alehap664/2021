@@ -1,22 +1,17 @@
-import React, {useEffect, useState} from 'react';
+import {useState} from 'react';
 import { Link } from "react-router-dom";
 import { Tab } from "../../../../helper/main";
 
 const Head = () => {
   const {changeTab, dropdownContent, getLabel} = Tab;
-  const [label, setLabel] = useState("")
+  const [label, setLabel] = useState("NEW RELEASES")
 
   const tabData = [
     { id: "tab-new", label: "NEW RELEASES" },
-    { id: "tab-movie", label: "MOVIES" },
-    { id: "tab-tv", label: "SERIES" },
-    { id: "tab-cartoon", label: "CARTOONS" }
+    { id: "tab-actions", label: "ACTIONS" },
+    { id: "tab-animations", label: "ANIMATIONS" },
+    { id: "tab-fantasies", label: "FANTASIES" }
   ]
-
-  useEffect(() => {
-    changeTab("tab-new", "NEW RELEASES");
-    setLabel(getLabel());
-  }, [])
 
   return (
     <div className="content__head">
@@ -29,7 +24,10 @@ const Head = () => {
                 <li key={ele.id}>
                   <Link 
                     to="#" id={ele.id} className={`tab ${index === 0 ? "tab--active" : ""}`}
-                    onClick={() => {changeTab(ele.id, ele.label)}} >{ele.label}
+                    onClick={() => {
+                      changeTab(ele.id, ele.label);
+                      setLabel(getLabel());
+                    }} >{ele.label}
                   </Link>
                 </li>
               ))}
@@ -46,7 +44,10 @@ const Head = () => {
                     <li key={ele.id}>
                       <Link 
                         to="#" id={ele.id} className={`tab ${index === 0 ? "tab--active" : ""}`}
-                        onClick={() => {changeTab(ele.id, ele.label)}} >{ele.label}
+                        onClick={() => {
+                          changeTab(ele.id, ele.label);
+                          setLabel(getLabel());
+                        }} >{ele.label}
                       </Link>
                     </li>
                   ))}

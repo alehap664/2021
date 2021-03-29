@@ -116,6 +116,7 @@
   &__category{
     line-height: 1;
     &__item{
+      display: inline-block;
       position: relative;
       margin-right: .5rem;
 
@@ -131,7 +132,6 @@
         @include pseudo(",");
         left: 100%;
         bottom: 0;
-        transform: translate(0,-20%);
         color: #{$orange};
       }
     }
