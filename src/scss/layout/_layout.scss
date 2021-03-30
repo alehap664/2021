@@ -8,8 +8,11 @@
   }
   &__title{
     font-size: 2.5rem;
-    &--wrap{
+    &.--wrap{
       @include d-flex(row, nowrap, space-between, center);
+      
+    }
+    &.--mb{
       margin-bottom: 30px;
     }
   }
@@ -45,7 +48,6 @@
 
 // Content
 .content__head{
-  padding-top: 30px;
   margin-bottom: 30px;
   border-bottom: 2px solid #{$gray};
 }
@@ -196,5 +198,80 @@
   }
   &.active{
     display: block;
+  }
+}
+
+
+.catalog{
+
+}
+
+.pagination{
+  @include d-flex("", "", center, center);
+  @include hover("a", white, #{$orange});
+
+  &>a{
+    margin: 0;
+    @include d-flex("", "", center, center);
+  }
+  
+  &__nav{
+    @include d-flex(row, nowrap, center, center);
+    margin: 0 10px;
+
+    &--item{
+      @include d-flex("", "", center, center);
+      @extend %btn-square;
+      margin: 0 10px;
+      border-radius: 0.4rem;
+      background-color: #{$gray};
+
+      &.--active{
+        border: 1px solid #{$orange};
+      }
+      &.--disable{
+        pointer-events: none;
+        cursor: default;
+      }
+    }
+  }
+}
+
+
+.footer{  
+  border-top: 1px solid #{$gray};
+  &__content{
+    @include d-flex(row, nowrap, "", center);
+    height: 80px;
+    padding: 20px 0px;
+  }
+  @include hover("a", white, white);
+  .logo{
+    font-size: 2rem;
+    // line-height: 1;
+  }
+  &__copyright{
+    margin-left: 50px;
+    color: white;
+    font-size: .7rem;
+  }
+  &__nav{
+    @include d-flex(row, nowrap, center, center);
+    margin-left: auto;
+    margin-right: 20px;
+
+    @include hover("a", white, #{$orange});
+    a{
+      margin: 0px 20px;
+      transition: all .4s ease;
+    }
+  }
+  &--btn{
+    @extend %btn-clear;
+    @extend %btn-square;
+    @extend %border;
+    background-color: #{$gray};
+    color: white;
+    line-height: 1;
   }
 }

@@ -1,14 +1,16 @@
 import { 
   visitedReducer, 
   categoriesReducer,
-  countriesReducer } from './film';
+  countriesReducer,
+  filmsReducer } from './film';
 
 import { combineReducers } from 'redux';
 
 const allReducer = combineReducers({
   visited: visitedReducer,
   categories: categoriesReducer,
-  countries: countriesReducer
+  countries: countriesReducer,
+  films: filmsReducer
 })
 
 export default allReducer

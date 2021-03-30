@@ -25,6 +25,15 @@ const countriesReducer = (state = [], action) => {
   }
 }
 
+const filmsReducer = (state = [], action) => {
+  switch (action.type) {
+    case "addFilms":
+      return state = action.value
+    default:
+      return state
+  }
+}
+
 export {
-  visitedReducer, categoriesReducer, countriesReducer
+  visitedReducer, categoriesReducer, countriesReducer, filmsReducer
 }

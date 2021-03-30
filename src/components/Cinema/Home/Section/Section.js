@@ -40,7 +40,7 @@ const Section = ({films}) => {
       <div className="container">
         <div className="row">
           <div className="col-12">
-            <div className="section__title--wrap">
+            <div className="section__title --wrap --mb">
               <h1 className="section__title">Expected premiere</h1>
               <div className="section__nav--wrap">
                 <Link to={path+"/detail"} className="view_all"> View all </Link>

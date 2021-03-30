@@ -1,4 +1,4 @@
-import {Review} from "../../UI/UI";
+import {Review} from "../../../UI/UI";
 
 const Reviews = () => {
   return (

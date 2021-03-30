@@ -16,6 +16,7 @@
 
 body{
   background-color: #{$black} !important;
+  scroll-behavior: smooth;
 }
 ::selection {
   background: #{$orange};

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Comment} from "../../UI/UI";
+import {Comment} from "../../../UI/UI";
 
 const Comments = () => {
   return (

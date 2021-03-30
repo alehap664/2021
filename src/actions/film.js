@@ -19,7 +19,13 @@ const addCountries = (countries) => {
   }
 }
 
+const getFilms = (films) => {
+  return{
+    type: "addFilms",
+    value: films
+  }
+}
 
 export {
-  addVisited, addCategories, addCountries
+  addVisited, addCategories, addCountries, getFilms
 }

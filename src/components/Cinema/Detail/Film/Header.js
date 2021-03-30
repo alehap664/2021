@@ -11,7 +11,7 @@ const Detail = ({film}) => {
   }
   return (
     <section className="section section--details">
-       <div className="header__bg--wrap">
+      <div className="header__bg--wrap">
         <div className="header__bg">
           <div 
           className="header__bg--item header__bg--active"
@@ -25,7 +25,7 @@ const Detail = ({film}) => {
       <div className="container">
         <div className="row">
           <div className="col-12">
-            <h1 className="section__title section__title--mb">
+            <h1 className="section__title section__title --mb">
               {film.film__title}
             </h1>
           </div>

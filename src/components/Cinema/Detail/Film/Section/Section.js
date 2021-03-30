@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Card} from '../../UI/UI';
-import { Tab } from "../../../../helper/main";
+import { Card} from '../../../UI/UI';
+import { Tab } from "../../../../../helper/main";
 
 // Sub Component
 import Comments from "./Comments";
@@ -25,7 +25,7 @@ const Section = ({film}) => {
   })
 
   return (
-    <section className>
+    <section className="section">
       <div className="content__head">
         <div className="container">
           <div className="row">
