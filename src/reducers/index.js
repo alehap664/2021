@@ -1,16 +1,16 @@
 import { 
-  visitedReducer, 
+  filmStoredReducer, 
   categoriesReducer,
   countriesReducer,
-  filmsReducer } from './film';
+  filmsStoredReducer } from './film';
 
 import { combineReducers } from 'redux';
 
 const allReducer = combineReducers({
-  visited: visitedReducer,
+  filmStored: filmStoredReducer,
   categories: categoriesReducer,
   countries: countriesReducer,
-  films: filmsReducer
+  filmsStored: filmsStoredReducer
 })
 
 export default allReducer

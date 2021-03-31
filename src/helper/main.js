@@ -145,16 +145,31 @@ const Tab = (() => {
 /**
  * 
  * @param {String} url - URL to get data
- * @returns data
+ * @param {Function} callback - (err, res)
+ * @returns res
  */
-const getData = (url) => {
+const getData = (url, callback = null) => {
   return new Promise((resolve, reject) => {
     axios.get(url)
-    .then( res => resolve(res))
-    .catch( res => reject(res))
+    .then( res => {
+      resolve(res);
+      if (typeof callback === "function") {
+        callback(null, res)
+      }
+    })
+    .catch( res => {
+      // console.log(res);
+      reject(res);
+      if (typeof callback === "function") {
+        callback(res, null)
+      }
+    })
   })
 }
 
+const throwErr = err => {
+  return `${err.message} ${err.response.data?.error || ""}`
+}
 export {
-  Carousel, Tab, getData
+  Carousel, Tab, getData, throwErr
 }

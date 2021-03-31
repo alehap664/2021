@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useRouteMatch, Link, useLocation } from "react-router-dom";
 
 import { useSelector, useDispatch } from 'react-redux';
-import { getFilms } from '../../../../actions/film';
+import { addFilms } from '../../../../actions/film';
 
 import { Card } from "../../UI/UI";
 import Loading from '../../../Loading/Loading';
@@ -11,7 +11,7 @@ import { getData } from "../../../../helper/main";
 
 const Catalog = () => {
   // Store
-  const storeFilms = useSelector( state => state.films);
+  const storeFilms = useSelector( state => state.filmsStored);
   const dispatch = useDispatch();
 
   const { path } = useRouteMatch();
@@ -35,7 +35,7 @@ const Catalog = () => {
       if (storeFilms[0]) return storeFilms;
  
       const res = await getData("https://ndthinh48-react-cinema.herokuapp.com/api/v.1/films");
-      dispatch(getFilms(res.data));
+      dispatch(addFilms(res.data));
       setFilms(res.data)
       return res.data;
     }

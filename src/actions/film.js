@@ -1,6 +1,6 @@
-const addVisited = (film) => {
+const addFilm = (film) => {
   return{
-    type: "addVisited",
+    type: "addFilm",
     value: film
   }
 }
@@ -19,7 +19,7 @@ const addCountries = (countries) => {
   }
 }
 
-const getFilms = (films) => {
+const addFilms = (films) => {
   return{
     type: "addFilms",
     value: films
@@ -27,5 +27,5 @@ const getFilms = (films) => {
 }
 
 export {
-  addVisited, addCategories, addCountries, getFilms
+  addFilm, addCategories, addCountries, addFilms
 }

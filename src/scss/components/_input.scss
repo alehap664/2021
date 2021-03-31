@@ -22,3 +22,7 @@
     opacity: 0;
   }
 }
+
+input[type="range"]{
+  color: #{$orange};
+}

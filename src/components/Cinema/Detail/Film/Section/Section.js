@@ -75,10 +75,10 @@ const Section = ({film}) => {
           </div>
           <div className="col-12 col-lg-4">
             <div className="row">
-              {data2.map( ele => (
-                <div className="col-6" key={Math.random()}>
+              {film.film__ref.map( film => (
+                <div className="col-6" key={film.id}>
                   <Card 
-                    to="#" 
+                    to={"/cinema/detail/"+film.id} 
                     title={film.film__title} 
                     categories={film.film__categories} 
                     image={film.film__cover} rate="10"></Card>

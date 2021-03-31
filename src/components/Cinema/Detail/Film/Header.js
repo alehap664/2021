@@ -37,7 +37,7 @@ const Detail = ({film}) => {
                     <img alt="" srcSet={film.film__cover} />
                     <span className="card__rate card__rate--green">10</span>
                   </div>
-                  <Link to="#" className="card__watch btn btn-orange">
+                  <Link to={"/cinema/watch/"+film.id} className="card__watch btn btn-orange">
                     <FaPlay className="mr-2" />Watch
                   </Link>
                 </div>
