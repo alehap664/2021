@@ -84,10 +84,10 @@ const Detail = ({film}) => {
           </div>
 
           <div className="col-12 col-xl-6">
-            <iframe src={film.film__trailer} width="100%" height="100%" title={film.film__title} ></iframe>
-            {/* <video autoPlay="autoplay" controls="controls" width="100%" height="100%"> 
-                <source src="https://www.googleapis.com/drive/v3/files/1O1ANl0Fp8g9IX6rArP_Tqxh4STad2gFR?alt=media&key=AIzaSyCtPEz4SHnmWA7H2HDgMb5LOCnqPtyLYGM" type="video/mp4" />
-            </video> */}
+            <div className="video__wrap">
+              <iframe id="video" src={film.film__trailer} width="100%" height="100%" title={film.film__title} ></iframe>
+            </div>
+            
           </div>
         </div>
       </div>

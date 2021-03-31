@@ -1,5 +1,11 @@
 .video__wrap{
   position: relative;
+  border-radius: .5rem;
+  margin-bottom: 30px;
+  overflow: hidden;
+
+  width: 100%;
+  padding-top: 56.25%;
 }
 
 #video__controls{
@@ -17,8 +23,13 @@
     @extend %btn-clear;
     background-color: transparent;
     color: white;
-    padding: 0;
+    padding: 5px;
     line-height: 1;
+    transition: all .4s ease;
+    border-radius: .4rem;
+    &:hover{
+      background-color: #{$orange};
+    }
 
     svg{
       font-size: 1.5rem;
@@ -30,14 +41,34 @@
   }
 }
 
-.video__seek{
-  flex: 1;
-  @include d-flex(row, nowrap, "", center);
-  
-  #seek{
-    flex: 1;
-    height: unset !important;
-  }
+#video{
+  position: absolute;
+  top: 0;
+
+  width: 100%;
+  height: 100%;
+
+  background-color: black;
 }
 
+
+#seek{
+  flex: 1;
+  height: unset !important;
+}
+#seek,
+.video__time_elapsed,
+#volume{
+  margin-left: 0 !important;
+}
+
+
+.video__thumb{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+
+  display: none;
+}
 

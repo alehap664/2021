@@ -29,7 +29,7 @@ const Film = () => {
   const filmWithRef = (film) => {
     return new Promise((resolve, reject) => {
       const query = film.film__categories.map( ele => "&categories="+ele).join("");
-      getData("http://localhost:5000/api/v.1/films?limit=7"+query)
+      getData("https://ndthinh48-react-cinema.herokuapp.com/api/v.1/films?limit=7"+query)
         .then( res => {
           film.film__ref = res.data;
           film.film__ref.splice(0,1);
@@ -55,7 +55,7 @@ const Film = () => {
           return;
         }
         // Get film
-        const res = await getData("http://localhost:5000/api/v.1/films/" + param.id);
+        const res = await getData("https://ndthinh48-react-cinema.herokuapp.com/api/v.1/films/" + param.id);
         const newFilm = await filmWithRef(res.data);
     
         setFilm(newFilm);

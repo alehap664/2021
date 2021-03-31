@@ -26,7 +26,7 @@ function App() {
 
 const Home = () => {
   return(
-    <Redirect to="/react-cinema/cinema">
+    <Redirect to="/cinema">
     
     </Redirect>
   )
