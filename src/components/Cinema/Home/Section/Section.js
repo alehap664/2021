@@ -25,7 +25,6 @@ const Section = ({films}) => {
 
     window.addEventListener("resize", () => {
       newCarousel.setup();
-      
     })
     btnNext.addEventListener("click", () => {
       newCarousel.next(1);
@@ -62,7 +61,7 @@ const Section = ({films}) => {
                       title={film.film__title} 
                       categories={film.film__categories || []} key={index}
                       image={film.film__cover}
-                      rate={index}
+                      rate={film.film__rate}
                     />
                   )
                 })}

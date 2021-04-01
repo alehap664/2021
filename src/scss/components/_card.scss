@@ -1,3 +1,9 @@
+._carousel{
+  .card-carousel{
+    margin-top: 30px;
+  }
+}
+
 .card-carousel{
   display: flex;
   flex-direction: row;
@@ -91,8 +97,8 @@
     &--red{
       border-color: red;
     }
-    &--yellow{
-      border-color: yellow;
+    &--orange{
+      border-color: #{$orange};
     }
     &--green{
       border-color: green;

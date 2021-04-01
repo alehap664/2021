@@ -69,10 +69,10 @@ const Nav = () => {
                 <NavItemDropdown id="dropdownCategory" label="category" listDropdownItem={categories} icon={<RiArrowDownSLine />}
                   onDropdown={navDropdown}
                 />
-                <NavItem to="#" label="Null" />
-                <NavItemDropdown id="dropdownMore" listDropdownItem={[1, 2, 3, 4, 5]} icon={<BsThreeDots />}
+                <NavItem to="/cinema/detail" label="View all" />
+                {/* <NavItemDropdown id="dropdownMore" listDropdownItem={["Cinema"]} icon={<BsThreeDots />}
                   onDropdown={navDropdown}
-                />
+                /> */}
               </ul>
 
               <div className="wrap ml-auto">
@@ -85,7 +85,7 @@ const Nav = () => {
                 </form>
                 <button className="nav__btn nav__btn--search2"><FaSearch onClick={showSearch} /></button>
                 <div className="nav__lang d-flex">
-                  <NavItemDropdown id="dropdownCategory1" label="EN" listDropdownItem={["EN", "VN"]} icon={<RiArrowDownSLine />}
+                  <NavItemDropdown id="dropdownLangues" label="EN" listDropdownItem={["EN", "VN"]} icon={<RiArrowDownSLine />}
                     onDropdown={navDropdown}
                   />
                 </div>
@@ -121,7 +121,7 @@ const NavItemDropdown = ({ id, label = "", listDropdownItem, icon, onDropdown })
         <ul className="nav__dropdown--scroll m-0">
           {listDropdownItem.map((ele, index) => (
             <li className="nav__dropdown__item" key={index}>
-              <Link to="#" className="nav--label">{ele?.category}</Link>
+              <Link to="#" className="nav--label">{ele?.category || ele}</Link>
             </li>
           ))}
         </ul>

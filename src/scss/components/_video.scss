@@ -10,7 +10,7 @@
 
 #video__controls{
   z-index: 2;
-  @include d-flex(row, nowrap, "", center);
+  @include d-flex(row, wrap, "", center);
   position: absolute;
   bottom: 0%;
 
@@ -32,7 +32,10 @@
     }
 
     svg{
-      font-size: 1.5rem;
+      font-size: 1rem;
+      @include screen("Ipad"){
+        font-size: 1.5rem;
+      }
     }
   }
 
@@ -53,22 +56,88 @@
 
 
 #seek{
-  flex: 1;
+  width: 100%;
   height: unset !important;
 }
+.video__time_elapsed{
+  font-size: .8rem;
+  margin-right: auto !important;
+}
+#volume{
+  width: 100px;
+}
+
 #seek,
 .video__time_elapsed,
 #volume{
   margin-left: 0 !important;
 }
 
-
 .video__thumb{
   position: absolute;
   width: 100%;
   height: 100%;
   top: 0;
-
   display: none;
+}
+
+.video__setting{
+  position: relative;
+  
+  @include screen("");
+
+  &--container{
+    display: none;
+    position: absolute;
+    bottom: 100%;
+    right: 0;
+    margin-bottom: 10px;
+    padding: 5px;
+
+    background-color: white;
+    color: black;
+    border-radius: 0.4rem;
+    border-bottom-right-radius: 0rem;
+
+    width: 350%;
+    font-size: 0.8rem;
+
+    &.--open{
+      display: block;
+    }
+
+    &::after{
+      @include pseudo("");
+      border: 4px solid transparent;
+      border-top-color: white;
+      height: 0;
+      width: 0;
+      left: 100%;
+      top: 100%;
+      transform: translate(-100%);
+    }
+  }
+}
+
+.video__quality{
+  @include d-flex(column, nowrap, center, center);
+  width: 100%;
+  li{
+    @include d-flex(row, nowrap, space-between, center);
+    width: 100%;
+    padding: 0.5rem;
+    border-radius: .4rem;
+    transition: .2s all ease;
+    &:hover{
+      background-color: #{$orange};
+      color: white;
+    }
+
+    input{
+      height: unset !important;
+      margin-right: .5rem;
+      border-radius: 50%;
+    }
+  }
 }
 

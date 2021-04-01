@@ -85,15 +85,24 @@
       top: 100%;
       background-color: #{$gray};
       padding: 10px;
-      margin-top: 10px;
-      height: 224px;
       z-index: 99999;
       // Responsive
-      @include screen("Laptop"){
-        width: 200px;
-        height: 200%;
-        margin-top: 0px;
+      &[aria-labelledby="dropdownCategory"]{
+        height: 224px;
+        @include screen("Laptop"){
+          width: 200px;
+          height: 200%;
+          margin-top: 0px;
+        }
       }
+      &[aria-labelledby="dropdownLangues"]{
+        height: 88px;
+        @include screen("Laptop"){
+          width: 200px;
+          margin-top: 0px;
+        }
+      }
+      
 
       &.active {
         visibility: visible;
@@ -101,6 +110,7 @@
         
       }
     }
+    
 
     &--scroll {
       width: 100%;

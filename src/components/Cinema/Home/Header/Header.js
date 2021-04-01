@@ -1,6 +1,5 @@
 import {useEffect, useState} from 'react';
 import {useRouteMatch} from 'react-router-dom';
-// import Loading from '../../../Loading/Loading.js';
 
 // Helper
 import { Carousel } from "../../../../helper/main.js";
@@ -10,6 +9,7 @@ import { Card } from "../../UI/UI";
 import { FaLongArrowAltLeft, FaLongArrowAltRight } from "react-icons/fa";
 
 const Header = ({films}) => {
+  console.log(films);
   const {path} = useRouteMatch();
 
   const $ = document.querySelector.bind(document);
@@ -85,7 +85,7 @@ const Header = ({films}) => {
                       title={film.film__title} 
                       categories={film.film__categories || []} key={index}
                       image={film.film__cover}
-                      rate={index}
+                      rate={film.film__rate}
                     />
                   )
                 })}

@@ -11,7 +11,7 @@ import { getData } from "../../../../helper/main";
 
 const Catalog = () => {
   // Store
-  const storeFilms = useSelector( state => state.filmsStored);
+  const filmsStored = useSelector( state => state.filmsStored);
   const dispatch = useDispatch();
 
   const { path } = useRouteMatch();
@@ -32,7 +32,7 @@ const Catalog = () => {
 
   useEffect(() => {
     const get = async () => {
-      if (storeFilms[0]) return storeFilms;
+      if (filmsStored[0]) return filmsStored;
  
       const res = await getData("https://ndthinh48-react-cinema.herokuapp.com/api/v.1/films");
       dispatch(addFilms(res.data));
@@ -86,7 +86,7 @@ const Catalog = () => {
                   title={film.film__title}
                   image={film.film__cover}
                   categories={film.film__categories}
-                  rate={"10"}
+                  rate={film.film__rate}
                 />
               </div>
             ))}

@@ -47,6 +47,11 @@
 }
 
 // Content
+.content{
+  & .content__head{
+    padding-top: 70px;
+  }
+}
 .content__head{
   margin-bottom: 30px;
   border-bottom: 2px solid #{$gray};
@@ -203,7 +208,7 @@
 
 
 .catalog{
-
+  padding: 70px 0px;
 }
 
 .pagination{

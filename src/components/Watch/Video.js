@@ -13,12 +13,30 @@ const Video = ({src, thumb}) => {
   const $ = document.querySelector.bind(document);
   const $$ = document.querySelectorAll.bind(document);
 
-  const [videoDuration, setVideoDuration] = useState({});
-  const [videoCurrentTime, setVideoCurrentTime] = useState({});
+  const [video, setVideo] = useState(null);
+  const [seek, setSeek] = useState(null);
+  const [volume, setVolume] = useState(null);
+
+  const [videoDuration, setVideoDuration] = useState({
+    hour: "00", min: "00", sec: "00"
+  });
+  const [videoCurrentTime, setVideoCurrentTime] = useState({
+    hour: "00", min: "00", sec: "00"
+  });
+  const [videoITag, setVideoITag] = useState("_18");
   const [volumeState, setVolumeState] = useState("");
   const [isPlay, setIsPlay] = useState(false);
+  const [isThumb, setIsThumb] = useState(true);
 
-  const formatTime = second => {
+  const iTag = {
+    "_18": "360p",
+    "_22": "720p",
+    "_37": "1080p",
+  }
+
+  const [saveCurrentTime, setSaveCurrentTime] = useState(0)
+
+  const videoFormatTime = second => {
     const time = new Date(second*1000).toISOString().substr(11, 8);
     const strToArr = time.split(":")
     return{
@@ -28,70 +46,60 @@ const Video = ({src, thumb}) => {
     }
   }
 
-  useEffect(() => {
-    const seek = $("#seek");
-    seek.value = 0;
-  
-  }, [])
-
-  const playBack = e => {
-    const video = $("#video");
-    if (video.paused) {
-      video.play();
-      setIsPlay(true);
-    }
-    else{
-      video.pause();
-      setIsPlay(false)
-    }
-    
-    
-  }
-
-  const timeUpdate = e =>{
-    const video = $("#video");
-    const seek = $("#seek");
-
-    const videoCurrentTime = Math.ceil(video.currentTime);
-    seek.value = videoCurrentTime;
-    setVideoCurrentTime(formatTime(videoCurrentTime))
-
-    $(".video__thumb").style.display = "none";
-    if (video.ended) {
-      $(".video__thumb").style.display = "block";
-    }
-  }
+  const duration = (video) => Math.ceil(video.duration);
+  const currentTime = (video) => Math.ceil(video.currentTime);
 
   const loadedMetadata = e => {
     console.log("Loaded");
     const video = $("#video");
     const seek = $("#seek");
+    const volume = $("#volume");
 
     const videoDuration = Math.ceil(video.duration);
+    seek.value = 0;
     seek.max = videoDuration;
-    setVideoDuration(formatTime(videoDuration))
+    console.log(saveCurrentTime);
+    video.currentTime = saveCurrentTime;
+
+    setVideo(video);
+    setSeek(seek);
+    setVolume(volume);
+
+    setIsPlay(false);
+    
+    setVideoDuration(videoFormatTime(duration(video)))
   }
 
-  const seek = e => {
-    const video = $("#video");
-    // video.pause();
+  const playBack = () => {
+    if (video.paused){
+      video.play();
+      setIsPlay(true);
+    } else{
+      video.pause();
+      setIsPlay(false);
+    }
+  };
 
-    const time = e.target.value;
+  const timeUpdate = () =>{
+    seek.value = currentTime(video);
+    setVideoCurrentTime(videoFormatTime(currentTime(video)));
 
+    video.currentTime === 0 ? setIsThumb(true) : setIsThumb(false)
+  }
+
+  const skip = () => {
+    const time = seek.value;
     video.currentTime = time;
-    // video.play();
-    console.log(1);
   }
 
-  const volumeControls = (e) => {
-    const video = $("#video");
-    const volumeValue = +e.target.value;
+  const volumeControls = () => {
+    const volumeValue = +volume.value;
 
     video.volume = volumeValue;
-    e.target.dataset.volume = volumeValue;
+    volume.dataset.volume = volumeValue;
   }
 
-  const updateVolume = () => {
+  const volumeUpdate = () => {
     const volume = $("#volume");
 
     switch (true) {
@@ -107,65 +115,105 @@ const Video = ({src, thumb}) => {
     }
   }
 
-  const toggleMuted = () => {
-    const video = $("#video");
-    const volume = $("#volume");
-
+  const volumeMuted = () => {
     video.muted = !video.muted;
     if (video.muted) return volume.value = 0;
     volume.value = volume.dataset.volume;
   }
 
-  const toggleFullScreen = () => {
+  const videoFullScreen = () => {
     const videoContainer = $(".video__wrap");
-
     if (document.fullscreenElement) return document.exitFullscreen();
     videoContainer.requestFullscreen();
+  }
+
+  const videoResolution = (itag) => {
+    setVideoITag(itag)
+    setSaveCurrentTime(currentTime(video));
+    console.log(saveCurrentTime);
+  }
+
+  const videoPip = async () => {
+    try {
+      if (video !== document.pictureInPictureElement) {
+        await video.requestPictureInPicture();
+      } else {
+        await document.exitPictureInPicture();
+      }
+    } catch (error) {
+      console.error(error)
+    } 
+  }
+
+  const toggleSetting = () => {
+    const settingContainer = $(".video__setting--container");
+    settingContainer.classList.toggle("--open")
   }
 
   return (
     <div className="video__wrap">
       <div id="video__controls">
 
-        <button className="video__play" onClick={playBack}>
+        <input type="range" id="seek" min="0" max="100" data-currenttime="0" onInput={skip} />
+
+        <button className="video__play" onClick={playBack} >
           {isPlay ? <IoIosPause /> : <IoIosPlay /> }
         </button>
-        <input type="range" id="seek" min="0" max="100" onChange={seek} />
-        <span className="video__time_elapsed">
-          {`${videoCurrentTime?.min || "00"}:${videoCurrentTime?.sec || "00"}`}
-          -
-          {`${videoDuration?.min || "00"}:${videoDuration?.sec || "00"}`}
-        </span>
 
-        <button onClick={toggleMuted}>
+        <button onClick={volumeMuted}>
           {volumeState === 'muted' ? <IoIosVolumeMute /> : volumeState === 'low' ? <IoIosVolumeLow /> : <IoIosVolumeHigh />  }
         </button>
         <input 
           type="range" id="volume" min="0" max="1" step="0.1" 
-          data-volume="0" data-volumeState={volumeState}
-          onInput={volumeControls}/>
+          data-volume="0" data-volumestate={volumeState}
+          onInput={volumeControls}
+        />
 
-        <button className="video__pic_in_pic">
+        <span className="video__time_elapsed">
+          {`${videoCurrentTime.min}:${videoCurrentTime.sec}`}
+          -
+          {`${videoDuration.min}:${videoDuration.sec}`}
+
+        </span>
+
+        <button className="video__pip" onClick={videoPip}>
           <FaShareSquare />
         </button>
-        <button><IoIosSettings /></button>
-        <button onClick={toggleFullScreen}><MdFullscreen /></button>
+
+        
+        <div className="video__setting">
+          <button><IoIosSettings onClick={toggleSetting} /></button>
+          <div className="video__setting--container">
+            <div className="video__quality">
+              {
+                Object.keys(src).reverse().map( (ele, i) => (
+                  <li key={i} onClick={() => videoResolution(ele)}>
+                    <input type="radio" name="quality" id={ele} value={ele} />
+                    <label htmlFor={ele}>{iTag[ele]}</label>
+                  </li>
+                ))
+              }
+            </div>
+          </div>
+        </div>
+
+        <button onClick={videoFullScreen}><MdFullscreen /></button>
 
       </div>
       <video 
         id="video"
         className="d-flex align-items-start"
-        src={src} width="100%"
+        src={src[videoITag]} width="100%"
         onTimeUpdate={timeUpdate}
         onLoadedMetadata={loadedMetadata}
-        onVolumeChange={updateVolume}
+        onVolumeChange={volumeUpdate}
         >
       </video>
 
       <div className="video__thumb"
         style={{
           background: `url(${thumb}) center center / contain no-repeat`,
-          display: `${isPlay ? "none" : "block"}`
+          display: `${isThumb ? "block" : "none"}`
         }}
       ></div>
     </div>

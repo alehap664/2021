@@ -170,6 +170,61 @@ const getData = (url, callback = null) => {
 const throwErr = err => {
   return `${err.message} ${err.response.data?.error || ""}`
 }
+
+const videoController = (() => {
+  let VIDEO, SEEK, VOLUME;
+
+  // helper
+  const videoFormatTime = second => {
+    const time = new Date(second*1000).toISOString().substr(11, 8);
+    const strToArr = time.split(":")
+    return{
+      hour: strToArr[0],
+      min: strToArr[1],
+      sec: strToArr[2],
+    }
+  }
+
+  // Set
+  const setVideo = video => VIDEO = video;
+  const setSeek = seek => VIDEO = seek;
+  const setVolume = volume => VIDEO = volume;
+
+  // Get
+  const videoIsPlay = () => !VIDEO.paused;
+  const videoDuration = () => Math.ceil(VIDEO.duration);
+  const videoDurationFormatted = () => {
+    const time = videoFormatTime(videoDuration());
+    return `${time.hour}:${time.min}:${time.sec}`
+  };
+  const videoCurrentTime = () => Math.ceil(VIDEO.currentTime);
+  
+  // Main
+  const loadedMetadata = () => {
+    SEEK.max = videoDuration()
+  }
+  const playBack = () => {
+    VIDEO.paused ? VIDEO.play() : VIDEO.paused();
+  }
+  const timeUpdate = () => {
+    SEEK.value = videoCurrentTime();
+  }
+
+  return{
+    // set
+    setVideo, setSeek, setVolume,
+
+    // Get
+    videoIsPlay,
+    videoDuration,
+    videoCurrentTime,
+    videoDurationFormatted,
+
+    // Main
+    playBack
+  }
+})()
+
 export {
-  Carousel, Tab, getData, throwErr
+  Carousel, Tab, getData, throwErr, videoController
 }

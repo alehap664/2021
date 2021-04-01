@@ -9,7 +9,9 @@ const Card = ({to, title, categories, image, rate}) => {
         <div className="card__cover">
           <img className="card__img" alt="" srcSet={image} />
           <Link to={to} className="card__play"><FaPlay className="pl-1"/></Link>
-          <span className="card__rate card__rate--red">{rate}</span>
+          <span 
+            className={`card__rate ${rate <= 5 ? "card__rate--red" : rate <= 8 ? "card__rate--orange" : "card__rate--green"}`}
+          >{rate}</span>
         </div>
         <div className="card__content">
           <h3 className="card__title"><Link to="#">{title}</Link></h3>
