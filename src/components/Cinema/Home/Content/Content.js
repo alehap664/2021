@@ -15,7 +15,12 @@ const Content = ({ films }) => {
   return (
     <section className="content">
       <Head />
-      <Container filsNew={filsNew} filmActions={filmActions} filmAnimations={filmAnimations} filmFantasies={filmFantasies} />
+      <Container 
+        filsNew={filsNew} 
+        filmActions={filmActions} 
+        filmAnimations={filmAnimations} 
+        filmFantasies={filmFantasies} 
+      />
     </section>
   )
 }

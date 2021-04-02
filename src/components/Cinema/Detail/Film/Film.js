@@ -71,11 +71,12 @@ const Film = () => {
   
   return (
     (film.id !== param.id) && !isErr ? <Loading /> 
-    : isErr ? <NotFound /> : 
-    <>
-      <Header film={film} />
-      <Section film={film} />
-    </>
+    : isErr ? <NotFound /> 
+    : 
+      <>
+        <Header film={film} />
+        <Section film={film} />
+      </>
   )
 }
 

@@ -3,15 +3,15 @@ import axios from 'axios';
 
 import { Link } from "react-router-dom";
 import { RiArrowDownSLine } from "react-icons/ri";
-import { BsThreeDots } from "react-icons/bs";
 import { FaSearch, FaSignInAlt } from "react-icons/fa";
 import { CgClose } from "react-icons/cg";
 
 import { useDispatch, useSelector } from 'react-redux';
-import { addCategories } from "../../../actions/film";
+import { addCategories, addCountries } from "../../../actions/film";
 
 const Nav = () => {
   const categories = useSelector(state => state.categories);
+  const countries = useSelector(state => state.countries);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -23,6 +23,11 @@ const Nav = () => {
       if (!categories[0]) {
         const data = await getData("https://ndthinh48-react-cinema.herokuapp.com/api/v.1/categories");
         dispatch(addCategories(data));
+      }
+      if (!countries[0]) {
+        const data = await getData("https://ndthinh48-react-cinema.herokuapp.com/api/v.1/countries");
+        console.log(data);
+        dispatch(addCountries(data));
       }
     })()
 

@@ -50,12 +50,14 @@ const Home = () => {
   }, [])
 
   return (
-    isErr ? <NotFound /> : 
-    <article className="home">
-      {!films[0] ? <Loading /> : <Header films={filmsSlide} /> }
-      {!films[0] ? <Loading /> : <Content films={films} /> }
-      {!films[0] ? <Loading /> : <Section films={filmsSlide} /> }
-    </article>
+    isErr 
+      ? <NotFound /> 
+      : 
+        <article className="home">
+          {!films[0] ? <Loading /> : <Header films={filmsSlide} /> }
+          {!films[0] ? <Loading /> : <Content films={films} /> }
+          {!films[0] ? <Loading /> : <Section films={filmsSlide} /> }
+        </article>
   )
 }
 

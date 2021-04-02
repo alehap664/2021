@@ -133,7 +133,6 @@
     }
     span:after, span:before{
       @include pseudo();
-      width: 16px;
       height: 2px;
       background-color: #fff;
       border-radius: 2px;
@@ -152,7 +151,6 @@
   }
   &--btn--active{
     span:before{
-      width: 16px;
       top: 50%;
       transform: rotate(45deg);
     }
