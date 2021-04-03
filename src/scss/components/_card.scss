@@ -63,30 +63,31 @@
     transition: 0.5s;
     transform: translate(-50%, -50%) scale(0.9);
 
-    width: 54px;
-    height: 54px;
+    width: 25%;
+    height: 17%;
     display: flex;
     justify-content: center;
     align-items: center;
 
     color: #{$orange} !important;
     background-color: rgba(255,255,255,0.2);
-    border: 6px solid rgba(255,255,255,0.15);
+    border: .3em solid rgba(255,255,255,0.15);
     border-radius: 50%;
 
-    font-size: 1.2rem;
+    font-size: 100%;
 
     &:hover{
       border-color: #{$orange};
     }
+    
   }
   &__rate{
     position: absolute;
-    top: 1rem;
-    left: 1rem;
+    top: 5%;
+    left: 5%;
 
-    width: 36px;
-    height: 36px;
+    width: 20%;
+    height: 14%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -95,6 +96,8 @@
     border: 2px solid transparent;
     background-color: rgba(26, 25, 31, .7);
     color: white;
+
+    font-size: 80%;
 
     &--red{
       border-color: red;
@@ -183,11 +186,12 @@
       margin-bottom: 1rem;
       li{
         @include d-flex(row, wrap, "", center);
-        span{
+        @include hover("a", #{$orange} !important, rgba(249, 171, 0, .8) !important);
+        span, a{
           margin-right: 0.5rem;
           position: relative;
         }
-        span:not(:first-child){
+        span:not(:first-child), a:not(:first-child){
           color: #{$orange};
           &:not(:last-child)::after{
             @include pseudo(",");

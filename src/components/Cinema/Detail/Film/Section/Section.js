@@ -81,7 +81,7 @@ const Section = ({film}) => {
                     to={"/cinema/detail/"+film.id} 
                     title={film.film__title} 
                     categories={film.film__categories} 
-                    image={film.film__cover} rate="10"></Card>
+                    image={film.film__cover} rate={film.film__rate}></Card>
                 </div>
               ))}
             </div>

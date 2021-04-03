@@ -9,10 +9,11 @@ import Catalog from './Detail/Catalog//Catalog';
 import Film from './Detail/Film/Film';
 import Watch from '../Watch/Watch';
 import Contact from './Contact/Contact';
+import policy from './policy/policy';
+import About from './About/About';
 
 function Cinema() {
   const { path } = useRouteMatch();
-  console.log(path);
   return (
     <>
       <Nav></Nav>
@@ -22,6 +23,8 @@ function Cinema() {
         <Route path={`${path}/detail/:id`} exact component={Film} />
         <Route path={`${path}/watch/:id`} exact component={Watch} />
         <Route path={`${path}/contacts`} exact component={Contact} />
+        <Route path={`${path}/policy`} exact component={policy} />
+        <Route path={`${path}/about`} exact component={About} />
         <Route path="*" exact component={NotFound} />
       </Switch>
       <Footer></Footer>

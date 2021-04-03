@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useRouteMatch, Link, useLocation, useHistory } from "react-router-dom";
 
 import { useSelector, useDispatch } from 'react-redux';
-import { addFilms, addCountries } from '../../../../actions/film';
+import { addFilms } from '../../../../actions/film';
 
 import { Card } from "../../UI/UI";
 import Loading from '../../../Loading/Loading';
@@ -180,7 +180,7 @@ const Catalog = () => {
         </div>
       </section>
 
-      <section className="content">
+      <section className="section">
         <div className="content__head">
           <div className="container">
             <div className="row filter__content">

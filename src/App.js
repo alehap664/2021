@@ -16,7 +16,7 @@ function App() {
         <Route path="/admin" component={Admin} />
         <Route path="*">
           <Nav/>
-            <NotFound />
+          <NotFound />
           <Footer/>
         </Route>
       </Switch>
@@ -26,9 +26,7 @@ function App() {
 
 const Home = () => {
   return(
-    <Redirect to="/cinema">
-    
-    </Redirect>
+    <Redirect to="/cinema"></Redirect>
   )
 }
 

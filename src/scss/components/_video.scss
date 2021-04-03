@@ -161,3 +161,29 @@
   }
 }
 
+.policy{
+  color: white;
+  p{
+    margin-bottom: 20px;
+  }
+  ol{
+    counter-reset: li;
+    list-style: none;
+  }
+  ol ol {
+    padding-left: 15px;
+    margin-top: 10px;
+  }
+  ol ol ol{
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  ol ol ol li{
+    margin-top: 5px;
+  }
+  ol li::before {
+    counter-increment: li;
+    content: counters(li, ".") ". ";
+  }
+}
+

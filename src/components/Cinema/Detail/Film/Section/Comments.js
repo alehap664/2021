@@ -11,7 +11,7 @@ const Comments = () => {
               user={{
                 avatar: "",
                 name: "Thịnh",
-                time: "123",
+                time: "01/01/2021 12:00 PM",
                 text: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sequi in, voluptatem doloribus, modi vitae adipisci dolorem officia id mollitia odio accusantium reprehenderit delectus possimus est recusandae laudantium sit? Corporis, nisi?",
                 rate: {like: 10, dislike: 1}
               }}
@@ -22,7 +22,7 @@ const Comments = () => {
               user={{
                 avatar: "",
                 name: "Thịnh",
-                time: "123",
+                time: "01/01/2021 12:00 PM",
                 text: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sequi in, voluptatem doloribus, modi vitae adipisci dolorem officia id mollitia odio accusantium reprehenderit delectus possimus est recusandae laudantium sit? Corporis, nisi?",
                 rate: {like: 10, dislike: 1}
               }}
@@ -33,7 +33,7 @@ const Comments = () => {
               user={{
                 avatar: "",
                 name: "Thịnh",
-                time: "123",
+                time: "01/01/2021 12:00 PM",
                 text: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sequi in, voluptatem doloribus, modi vitae adipisci dolorem officia id mollitia odio accusantium reprehenderit delectus possimus est recusandae laudantium sit? Corporis, nisi?",
                 rate: {like: 10, dislike: 1}
               }}
@@ -44,7 +44,7 @@ const Comments = () => {
               user={{
                 avatar: "",
                 name: "Thịnh",
-                time: "123",
+                time: "01/01/2021 12:00 PM",
                 text: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sequi in, voluptatem doloribus, modi vitae adipisci dolorem officia id mollitia odio accusantium reprehenderit delectus possimus est recusandae laudantium sit? Corporis, nisi?",
                 rate: {like: 10, dislike: 1}
               }}
@@ -55,7 +55,7 @@ const Comments = () => {
               user={{
                 avatar: "",
                 name: "Thịnh",
-                time: "123",
+                time: "01/01/2021 12:00 PM",
                 text: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sequi in, voluptatem doloribus, modi vitae adipisci dolorem officia id mollitia odio accusantium reprehenderit delectus possimus est recusandae laudantium sit? Corporis, nisi?",
                 rate: {like: 10, dislike: 1}
               }}
@@ -66,7 +66,7 @@ const Comments = () => {
               user={{
                 avatar: "",
                 name: "Thịnh",
-                time: "123",
+                time: "01/01/2021 12:00 PM",
                 text: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sequi in, voluptatem doloribus, modi vitae adipisci dolorem officia id mollitia odio accusantium reprehenderit delectus possimus est recusandae laudantium sit? Corporis, nisi?",
                 rate: {like: 10, dislike: 1}
               }}

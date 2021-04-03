@@ -3,6 +3,13 @@
   padding: 70px 0px;
   color: white;
 
+  &__text{
+    color: #fff;
+    font-size: 16px;
+    line-height: 26px;
+    margin-bottom: 20px;
+  }
+
   &--border{
     border-top: 1px solid #{$gray};
   }
@@ -233,7 +240,6 @@
 
 
 .footer{
-  margin-top: 50px;
   border-top: 1px solid #{$gray};
   &__content{
     @include d-flex(row, wrap, "", center);
@@ -272,7 +278,6 @@
   }
 
   @include screen("Ipad"){
-      margin-top: 70px;
     .logo{
       font-size: 2rem;
       margin-bottom: 0px;
@@ -368,4 +373,57 @@
       }
     }
   }
+}
+
+.feature{
+  @include d-flex(row, nowrap, center, "");
+  margin-top: 50px;
+  padding-right: 90px;
+
+  &__icon{
+    font-size: 42px;
+    color: #{$orange};
+    align-self: flex-start;
+    line-height: 1;
+    margin-top: -10px; 
+  }
+  &__content{
+    margin-left: 20px;
+  }
+  &__title{
+    color: #fff;
+    display: block;
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    line-height: 100%;
+  }
+}
+
+.how{
+  margin-top: 50px;
+  padding-right: 90px;
+
+  &__number{
+    font-size: 46px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    display: block;
+    color: #f9ab00;
+    width: 100%;
+  }
+  &__title{
+    color: #fff;
+    display: block;
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    line-height: 100%;
+  }
+}
+
+.partner{
+  display: block;
+  margin-top: 40px;
+  img{opacity: 0.7}
 }

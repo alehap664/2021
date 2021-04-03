@@ -34,7 +34,9 @@ const Detail = ({film}) => {
                 <div className="col-12 col-sm-5 col-md-4 col-lg-3 col-xl-5">
                   <div className="card__cover">
                     <img alt="" srcSet={film.film__cover} />
-                    <span className="card__rate card__rate--green">10</span>
+                    <span className={`card__rate ${film.film__rate <= 5 ? "card__rate--red" : film.film__rate <= 8 ? "card__rate--orange" : "card__rate--green"}`}>
+                      {film.film__rate}
+                    </span>
                   </div>
                   <Link to={"/cinema/watch/"+film.id} className="card__watch btn btn-orange">
                     <FaPlay className="mr-2" />Watch
@@ -54,7 +56,9 @@ const Detail = ({film}) => {
                       </li>
                       <li>
                         <span>Category:</span>
-                        { render(film.film__categories) }
+                        { film.film__categories.map( (ele, index) => (
+                          <Link key={index} to={`/cinema/detail?page=1&categories=${ele.toLowerCase()}`}>{ele}</Link>
+                        )) }
                       </li>
                       <li>
                         <span>Release year:</span>
@@ -66,7 +70,9 @@ const Detail = ({film}) => {
                       </li>
                       <li>
                         <span>Country:</span>
-                        { render(film.film__countries) }
+                        { film.film__countries.map( (ele, index) => (
+                          <Link key={index} to={`/cinema/detail?page=1&countries=${ele.toLowerCase()}`}>{ele}</Link>
+                        )) }
                       </li>
                     </ul>
                     <div className="card__description">

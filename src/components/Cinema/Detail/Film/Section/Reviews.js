@@ -9,8 +9,8 @@ const Reviews = () => {
             <Review
               user={{
                 avatar: "",
-                name: "Thịnh",
-                time: "123",
+                name: "Nice",
+                time: "01/01/2021 12:00 PM by Thịnh",
                 text: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deleniti laborum maxime maiores harum rerum, esse optio placeat omnis accusantium sequi nemo incidunt quis, saepe sint eveniet voluptate qui culpa voluptatibus.",
                 rating: 5
               }}
@@ -21,8 +21,8 @@ const Reviews = () => {
             <Review
               user={{
                 avatar: "",
-                name: "Thịnh",
-                time: "123",
+                name: "Nice",
+                time: "01/01/2021 12:00 PM by Thịnh",
                 text: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deleniti laborum maxime maiores harum rerum, esse optio placeat omnis accusantium sequi nemo incidunt quis, saepe sint eveniet voluptate qui culpa voluptatibus.",
                 rating: 7
               }}
@@ -33,8 +33,8 @@ const Reviews = () => {
             <Review
               user={{
                 avatar: "",
-                name: "Thịnh",
-                time: "123",
+                name: "Nice",
+                time: "01/01/2021 12:00 PM by Thịnh",
                 text: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deleniti laborum maxime maiores harum rerum, esse optio placeat omnis accusantium sequi nemo incidunt quis, saepe sint eveniet voluptate qui culpa voluptatibus.",
                 rating: 8.5
               }}
@@ -45,8 +45,8 @@ const Reviews = () => {
             <Review
               user={{
                 avatar: "",
-                name: "Thịnh",
-                time: "123",
+                name: "Nice",
+                time: "01/01/2021 12:00 PM by Thịnh",
                 text: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deleniti laborum maxime maiores harum rerum, esse optio placeat omnis accusantium sequi nemo incidunt quis, saepe sint eveniet voluptate qui culpa voluptatibus.",
                 rating: 7.5
               }}
@@ -57,8 +57,8 @@ const Reviews = () => {
             <Review
               user={{
                 avatar: "",
-                name: "Thịnh",
-                time: "123",
+                name: "Nice",
+                time: "01/01/2021 12:00 PM by Thịnh",
                 text: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deleniti laborum maxime maiores harum rerum, esse optio placeat omnis accusantium sequi nemo incidunt quis, saepe sint eveniet voluptate qui culpa voluptatibus.",
                 rating: 10
               }}

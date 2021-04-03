@@ -12,14 +12,14 @@ const Footer = () => {
                 <span className="text-orange">BNN</span>CINEMA
               </Link>
               <ul className="footer__nav">
-                <Link to="#">About Us</Link>
-                <Link to="#">Contacts</Link>
-                <Link to="#">Privacy police</Link>
+                <Link to="/cinema/about">About Us</Link>
+                <Link to="/cinema/contacts">Contacts</Link>
+                <Link to="/cinema/policy">Privacy police</Link>
               </ul>
               <div className="footer__copyright">
                 © BNNCINEMA, 2021
                 <br/>
-                Create by <span className="text-warning">Nguyễn Thịnh</span>
+                Create by <a href="https://www.facebook.com/nguyenducthinh48/" className="text-warning">Nguyễn Thịnh</a>
               </div>
               
               <button className="footer--btn"

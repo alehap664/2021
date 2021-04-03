@@ -34,7 +34,7 @@
   position: fixed;
   top: 80px;
   right: 0%;
-  z-index: 9999999;
+  z-index: 999;
   transform: translate(100%, 0%);
   transition: all ease 0.4s;
   padding: 30px !important;
@@ -89,23 +89,24 @@
       top: 100%;
       background-color: #{$gray};
       padding: 10px;
-      z-index: 99999;
+      z-index: 9;
       // Responsive
-      &[aria-labelledby="dropdownCategory"]{
-        height: 224px;
+      &[aria-labelledby="dropdownCategory"],
+      &[aria-labelledby="dropdownMore"]{
         @include screen("Laptop"){
           width: 200px;
-          height: 200%;
-          margin-top: 0px;
         }
       }
       &[aria-labelledby="dropdownLangues"]{
-        height: 88px;
-        @include screen("Laptop"){
-          width: 200px;
-          margin-top: 0px;
-        }
+        z-index: 9999;
       }
+      // &[aria-labelledby="dropdownLangues"]{
+      //   height: 88px;
+      //   @include screen("Laptop"){
+      //     width: 200px;
+      //     margin-top: 0px;
+      //   }
+      // }
       
 
       &.active {
@@ -117,8 +118,8 @@
     
 
     &--scroll {
-      width: 100%;
-      max-height: 100%;
+      max-width: 200px;
+      max-height: 204px;
       overflow: auto;
 
       &::-webkit-scrollbar {

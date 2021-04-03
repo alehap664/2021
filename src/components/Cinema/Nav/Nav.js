@@ -41,6 +41,11 @@ const Nav = () => {
 
   }, [])
 
+  const dropdownMore = [
+    { label: "Contacts", to: "/cinema/contacts" },
+    { label: "About Us", to: "/cinema/about" },
+    { label: "Private Policy", to: "/cinema/policy" }
+  ]
 
   const navDropdown = (e) => {
     const id = e.target.id
@@ -78,7 +83,6 @@ const Nav = () => {
     const input = $(`input#searchFilm`);
     const searchSTR = formatString(input.value);
     if (searchSTR.length === 0) return alert("Please input some value");
-    console.log(123);
     history.push(`/cinema/detail?page=1&search=${searchSTR}`)
   }
 
@@ -118,10 +122,10 @@ const Nav = () => {
                   </span>
                   <div className="nav__dropdown--wrap" aria-labelledby="dropdownMore">
                     <ul className="nav__dropdown--scroll m-0">
-                      {["contacts"].map((ele, index) => (
+                      {dropdownMore.map((ele, index) => (
                         <li className="nav__dropdown__item" key={index}>
-                          <Link to={`/cinema/${ele}`} 
-                            className="nav--label">{ele}</Link>
+                          <Link to={ele.to} 
+                            className="nav--label">{ele.label}</Link>
                         </li>
                       ))}
                     </ul>
