@@ -2,12 +2,13 @@ import { useState, useEffect } from 'react';
 import { useRouteMatch, Link, useLocation, useHistory } from "react-router-dom";
 
 import { useSelector, useDispatch } from 'react-redux';
-import { addFilms } from '../../../../actions/film';
+import { addFilms, addCountries } from '../../../../actions/film';
 
 import { Card } from "../../UI/UI";
 import Loading from '../../../Loading/Loading';
 import { IoIosArrowForward, IoIosArrowBack } from 'react-icons/io';
-import { getData } from "../../../../helper/main";
+import { formatString, getData } from "../../../../helper/main";
+import NotFound from '../../../Notfound/Notfound';
 
 const Catalog = () => {
   const useQuery = () => {
@@ -22,95 +23,76 @@ const Catalog = () => {
   // Store
   const filmsStored = useSelector( state => state.filmsStored);
   const categories = useSelector( state => state.categories);
-  const countriesStored = useSelector( state => state.countries);
+  const countries = useSelector( state => state.countries);
   const dispatch = useDispatch();
 
-  const { path } = useRouteMatch();
-  
   // State
-  const [films, setFilms] = useState([]);
-  const [filmsFilter, setFilmsFilter] = useState([]);
-  const [pagination, setPagination] = useState([]);
-  const [pageState, setPageState] = useState(1);
-  const [countries, setCountries] = useState([]);
-  const [isSearch, setIsSearch] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false)
 
-  const page = +query.get("page") || 1;
-  const recordPerPage = 18;
-  const start = page * 18 - 18;
-  const end = page * 18;
-
-  // query
-  const queryCategories = query.get("categories") || "none";
-  const queryCountries = query.get("countries") || "none";
-  const queryRate =  query.getAll("rate");
-  const queryRelease = query.getAll("release");
-
-  const temp_queryCategories2 = queryCategories === "none" ? "" : `&categories=${queryCategories}`;
-  const temp_queryCountries2 = queryCountries === "none" ? "" : `&countries=${queryCountries}`;
-  const temp_queryRate2 = queryRate.length === 0 ? "" : `&rate=${queryRate[0]}&rate=${queryRate[1]}`;
-  const temp_queryRelease2 = queryRelease.length === 0 ?"" : `&release=${queryRelease[0]}&release=${queryRelease[1]}`;
-
-  const queryURL = temp_queryCategories2+temp_queryCountries2+temp_queryRate2+temp_queryRelease2
+  const { path } = useRouteMatch();
 
   useEffect(() => {
-    
-    const get = async () => {
-      if (filmsStored[0]) return filmsStored;
- 
-      const res = await getData("https://ndthinh48-react-cinema.herokuapp.com/api/v.1/films");
-      dispatch(addFilms(res.data));
-      setFilms(res.data)
-      return res.data;
-    }
-    const searchCate = key => filmsStored.filter( film => (
-      film.film__categories
-        .map( ele => ele.toLowerCase())
-        .includes(key)
-    ))
-    
-    (async () => {
-      if (!isSearch) {
-        const data = await get();
-        setFilms(data);
+    (async () => {     
+      if (filmsStored.length === 0) {
+        const resFilms = await getData("https://ndthinh48-react-cinema.herokuapp.com/api/v.1/films");
+        dispatch(addFilms(resFilms.data));
+      };
 
-        const res = await getData("https://ndthinh48-react-cinema.herokuapp.com/api/v.1/countries");
-        setCountries(res.data);
+      $(`input#filter__rate--start`).value = queryRate[0]
+      $(`input#filter__rate--end`).value = queryRate[1]
+      $(`input#filter__release--start`).value = queryRelease[0]
+      $(`input#filter__release--end`).value = queryRelease[1]
 
-        // $(`#filter__rate--start`).value = 0
-        // $(`#filter__rate--end`).value = 10
-        // $(`#filter__release--start`).value = 2010
-        // $(`#filter__release--end`).value = 2019
-      }
-
-      const temp = filmsStored.filter( film => (
-        queryCategories === "none" 
-          ? true 
-          : film.film__categories
-            .map( ele => ele.toLowerCase())
-            .includes(queryCategories)
-        )).filter( film => (
-          queryCountries === "none"
-          ? true
-          : film.film__countries
-            .map( ele => ele.toLowerCase())
-            .includes(queryCountries)
-        )).filter( film => (
-          queryRate.length === 0
-          ? true
-          : +film.film__rate >= queryRate[0] && +film.film__rate <= queryRate[1] 
-        )).filter( film => (
-          queryRelease.length === 0
-          ? true
-          : +film.film__release >= queryRelease[0] && +film.film__release <= queryRelease[1] 
-        ))
-  
-      const totalPage = Math.ceil(films.length / recordPerPage);
-      const pagination = Array(totalPage).fill(0).map( (ele, index) => index + 1);
-      setPagination(pagination);
-      setFilms(temp)
+      setIsLoaded(true)
     })()
-  }, [films])
+  }, [])
+
+  // Pagination
+    // Set up
+    const page = +query.get("page") || 1;
+    const recordPerPage = 24;
+    const start = page * recordPerPage - recordPerPage;
+    const end = page * recordPerPage;
+
+    // Query filter
+    const querySearch = query.get("search") || "none";
+    const queryCategories = query.get("categories") || "none";
+    const queryCountries = query.get("countries") || "none";
+    const queryRate = query.getAll("rate").length === 0 ? [0, 10] : query.getAll("rate");
+    const queryRelease = query.getAll("release").length === 0 ? [2000, 2021] : query.getAll("release");
+    const querySTR = useLocation().search.replace(/^\?page=\d+/, "");
+    
+    
+    // Apply filter
+    const films = filmsStored.filter( film => (
+      querySearch === "none"
+      ? true
+      : !film.film__title
+        ? ""
+        : formatString(film.film__title).search(querySearch) === -1 ? false : true
+    )).filter( film => (
+      queryCategories === "none" 
+      ? true 
+      : film.film__categories
+        .map( ele => ele.toLowerCase())
+        .includes(queryCategories)
+    )).filter( film => (
+      queryCountries === "none"
+      ? true
+      : film.film__countries
+        .map( ele => ele.toLowerCase())
+        .includes(queryCountries)
+    )).filter( film => (
+      queryRate.length === 0
+      ? true
+      : +film.film__rate >= queryRate[0] && +film.film__rate <= queryRate[1] 
+    )).filter( film => (
+      queryRelease.length === 0 
+      ? true
+      : +film.film__release >= queryRelease[0] && +film.film__release <= queryRelease[1] 
+    ))
+    const totalPage = Math.ceil(films.length / recordPerPage);
+    const pagination = Array(totalPage).fill(0).map( (ele, index) => index + 1);
 
   const dropDown = (id) => {
     const menus = $$(`.filter__item--menu`);
@@ -172,9 +154,7 @@ const Catalog = () => {
 
     history.push(`/cinema/detail?page=1${query}`)
   }
-  console.log(queryRate);
-  console.log(queryRelease);
-
+  
   return (
     <>
       <section className="section section--details">
@@ -200,19 +180,18 @@ const Catalog = () => {
         </div>
       </section>
 
-      {!films[0] || !countries[0] ? <Loading /> : 
       <section className="content">
         <div className="content__head">
           <div className="container">
             <div className="row filter__content">
-              <div className="col-2">
+              <div className="col-12 col-sm-6 col-lg-2">
                 <div className="filter__item">
                   <span className="filter__item--label" aria-labelledby="filter__categories">Categories</span>
                   <div className="filter__item--dropdown" id="filter__categories" onClick={()=>dropDown("filter__categories")}>
                     <input type="button" data-id="filter__categories" value={queryCategories}/>
                     <span></span>
                   </div>
-                  <div className="filter__item--menu --active" aria-labelledby="filter__categories">  
+                  <div className="filter__item--menu" aria-labelledby="filter__categories">  
                     <ul className="filter__item__scroll">
                       <li 
                         data-value="NONE"
@@ -231,7 +210,7 @@ const Catalog = () => {
                   </div>
                 </div>
               </div>
-              <div className="col-2">
+              <div className="col-12 col-sm-6 col-lg-2">
                 <div className="filter__item">
                   <span className="filter__item--label">Countries</span>
                   <div className="filter__item--dropdown" id="filter__countries" onClick={()=>dropDown("filter__countries")}>
@@ -256,13 +235,15 @@ const Catalog = () => {
                   </div>
                 </div>
               </div>
-              <div className="col-2">
+              <div className="col-12 col-sm-6 col-lg-2">
                 <div className="filter__item">
                   <span className="filter__item--label">Rate</span>
                   <div className="filter__item--dropdown" id="filter__rate" onClick={()=>dropDown("filter__rate")}>
-                    <input type="button" data-id="filter__rate--start" value={queryRate[0]}/>
+                    <input type="button" data-id="filter__rate--start" 
+                      value={queryRate[0]}/>
                     -
-                    <input type="button" data-id="filter__rate--end" value={queryRate[1]}/>
+                    <input type="button" data-id="filter__rate--end" 
+                      value={queryRate[1]}/>
                     <span></span>
                   </div>
                   <div className="filter__item--menu" aria-labelledby="filter__rate">  
@@ -279,38 +260,49 @@ const Catalog = () => {
                   </div>
                 </div>
               </div>
-              <div className="col-2">
+              <div className="col-12 col-sm-6 col-lg-2">
                 <div className="filter__item">
                   <span className="filter__item--label">Release</span>
                   <div className="filter__item--dropdown" id="filter__release" onClick={()=>dropDown("filter__release")}>
-                    <input type="button" data-id="filter__release--start" value={queryRelease[0]}/>
+                    <input type="button" data-id="filter__release--start" 
+                      value={queryRelease[0]}
+                    />
                     -
-                    <input type="button" data-id="filter__release--end" value={queryRelease[1]}/>
+                    <input type="button" data-id="filter__release--end" 
+                      value={queryRelease[1]}
+                    />
                     <span></span>
                   </div>
                   <div className="filter__item--menu" aria-labelledby="filter__release">  
                     <div className="filter__item--rate">
                       Min: <input 
-                        type="range" id="filter__release--start" min="2010" max="2021" step="1" 
+                        type="range" id="filter__release--start" min="2000" max="2021" step="1" 
                         onInput={(e) => filterMinMax(e, "filter__release--start", "filter__release--end")} />
                     </div>
                     <div className="filter__item--rate">
                       Max: <input 
-                        type="range" id="filter__release--end" min="2010" max="2021" step="1" 
+                        type="range" id="filter__release--end" min="2000" max="2021" step="1" 
                         onInput={(e) => filterMinMax(e, "filter__release--start", "filter__release--end")} />
                     </div>
                   </div>
                 </div>
               </div>
-              <div className="col-2 ml-auto">
-                <button className="filter__btn" onClick={applyFilter}>Hahaha</button>
+              <div className="col-12 col-lg-2 ml-auto">
+                <div className="filter__btn" onClick={applyFilter}>
+                  <button>Apply</button>
+                </div>
               </div>
             </div>
           </div>
         </div>
+        
+        {!isLoaded
+        ? <Loading /> : films.length === 0 || page > totalPage || page < 1
+        ? <NotFound />
+        : 
         <div className="container">
           <div className="row">
-            {(films).slice(start, end).map( film => (
+            {films.slice(start, end).map( film => (
               <div className="col-6 col-sm-4 col-md-3 col-xl-2 p-0" key={film.id}>
                 <Card
                   to={`${path}/${film.id}`}
@@ -320,33 +312,33 @@ const Catalog = () => {
                   rate={film.film__rate}
                 />
               </div>
-            ))}
+              ))
+            }
 
             <div className="col-12">
               <div className="pagination">
-                <Link to={`${path}?page=${page-1}${queryURL}`} 
-                  className={`pagination__nav--item ${page <= 1 ? "--disable" : ""}`}
+                <Link to={`${path}?page=${page-1}${querySTR}`} 
+                  className={`pagination--item ${page <= 1 ? "--disable" : ""}`}
                 ><IoIosArrowBack /></Link>
-                <ul className="pagination__nav">
-                  {(page < 5 ? pagination.slice(0, 5) 
-                    : page > pagination.length - 5 ? pagination.slice(pagination.length - 5) 
-                    : pagination.slice(page-3, page+2))
-                      .map( ele => (
-                        <Link to={`${path}?page=${ele}${queryURL}`}
-                          key={ele}
-                          className={`pagination__nav--item ${ele === page ? "--active --disable" : ""}`}
-                        >{ele}</Link>
-                      ))
-                  }
-                </ul>
-                <Link to={`${path}?page=${page+1}${queryURL}`} 
-                  className={`pagination__nav--item ${page >= pagination.length ? "--disable" : ""}`}
+                {(page < 5 ? pagination.slice(0, 5) 
+                  : page > pagination.length - 4 ? pagination.slice(pagination.length - 5) 
+                  : pagination.slice(page-3, page+2))
+                    .map( ele => (
+                      <Link to={`${path}?page=${ele}${querySTR}`}
+                        key={ele}
+                        className={`pagination--item ${ele === page ? "--active --disable" : ""}`}
+                      >{ele}</Link>
+                    ))
+                }
+                <Link to={`${path}?page=${page+1}${querySTR}`} 
+                  className={`pagination--item ${page >= pagination.length ? "--disable" : ""}`}
                 ><IoIosArrowForward /></Link>
               </div>
             </div>
           </div>
         </div>
-      </section> }    
+        } 
+      </section>    
       
     </>
   )

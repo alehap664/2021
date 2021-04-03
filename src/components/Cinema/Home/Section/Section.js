@@ -55,7 +55,6 @@ const Section = ({films}) => {
                   if (film.film__categories) {
                     film.film__categories.length = 3
                   }
-                  console.log(film.film__categories);
                   return(
                     <Card to={`${path}/detail/${film.id}` || "#"}
                       title={film.film__title} 

@@ -1,10 +1,14 @@
 .filter__content{
-  margin-bottom: 20px;
   color: white;
+  margin-bottom: 20px;
 }
 
 .filter__item{
   position: relative;
+  margin-bottom: 20px;
+  @include screen("Ipad-large"){
+    margin-bottom: 0;
+  }
 
   &--label{
     color: rgba(255, 255, 255, 0.8);
@@ -35,9 +39,11 @@
       padding: 0;
       margin-right: 5px;
 
-      &[data-id="filter__rate--start"]{
+      &[data-id="filter__rate--start"],
+      &[data-id="filter__release--start"]{
         margin-right: 0;
       }
+      
     }
     span{
       position: relative;
@@ -163,12 +169,20 @@
 }
 
 .filter__btn{
-  @include d-flex(row, nowrap, center, center);
-  @extend %btn-clear;
-  @extend %border;
+  @include d-flex(row, nowrap, flex-start, center);
   height: 100%;
   width: 100%;
   
-  background-color: #{$gray};
-  color: white;
+  @include screen("Ipad-large"){
+    justify-content: flex-end
+  }
+  
+  button{
+    @extend %btn-clear;
+    @extend %border;
+    background-color: #{$gray};
+    color: white;
+
+    padding: 0.5rem 2rem;
+  }
 }

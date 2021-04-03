@@ -9,7 +9,6 @@ import { Card } from "../../UI/UI";
 import { FaLongArrowAltLeft, FaLongArrowAltRight } from "react-icons/fa";
 
 const Header = ({films}) => {
-  console.log(films);
   const {path} = useRouteMatch();
 
   const $ = document.querySelector.bind(document);
@@ -79,7 +78,6 @@ const Header = ({films}) => {
                   if (film.film__categories) {
                     film.film__categories.length = 3
                   }
-                  console.log(film.film__categories);
                   return(
                     <Card to={`${path}/detail/${film.id}` || "#"}
                       title={film.film__title} 

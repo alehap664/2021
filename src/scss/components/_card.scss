@@ -37,6 +37,8 @@
   &__cover{
     position: relative;
     background-color: #{$black};
+    border-radius: .5rem;
+    overflow: hidden;
 
     img{
       width: 100%;

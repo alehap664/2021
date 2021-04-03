@@ -50,7 +50,6 @@ const Video = ({src, thumb}) => {
   const currentTime = (video) => Math.ceil(video.currentTime);
 
   const loadedMetadata = e => {
-    console.log("Loaded");
     const video = $("#video");
     const seek = $("#seek");
     const volume = $("#volume");
@@ -58,7 +57,6 @@ const Video = ({src, thumb}) => {
     const videoDuration = Math.ceil(video.duration);
     seek.value = 0;
     seek.max = videoDuration;
-    console.log(saveCurrentTime);
     video.currentTime = saveCurrentTime;
 
     setVideo(video);
@@ -130,7 +128,6 @@ const Video = ({src, thumb}) => {
   const videoResolution = (itag) => {
     setVideoITag(itag)
     setSaveCurrentTime(currentTime(video));
-    console.log(saveCurrentTime);
   }
 
   const videoPip = async () => {

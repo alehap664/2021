@@ -20,7 +20,7 @@ const categoriesReducer = (state = [], action) => {
 const countriesReducer = (state = [], action) => {
   switch (action.type) {
     case "addCountries":
-      return state
+      return state = action.value
     default:
       return state
   }

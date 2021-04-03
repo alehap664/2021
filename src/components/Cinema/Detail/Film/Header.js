@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { FaPlay } from "react-icons/fa";
 
 const Detail = ({film}) => {
-  console.log(film);
   const render = key => {
     return key.map( (ele, index) => (
       <span key={index}>{ele}</span>

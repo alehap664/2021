@@ -210,63 +210,55 @@
 }
 
 .pagination{
-  @include d-flex("", "", center, center);
+  @include d-flex(row, wrap, center, center);
   @include hover("a", white, #{$orange});
 
-  &>a{
-    margin: 0;
+  &--item{
     @include d-flex("", "", center, center);
-  }
-  
-  &__nav{
-    @include d-flex(row, nowrap, center, center);
-    margin: 0 10px;
+    @extend %btn-square;
+    margin: 10px;
+    border-radius: 0.4rem;
+    background-color: #{$gray};
 
-    &--item{
-      @include d-flex("", "", center, center);
-      @extend %btn-square;
-      margin: 0 10px;
-      border-radius: 0.4rem;
-      background-color: #{$gray};
-
-      &.--active{
-        border: 1px solid #{$orange};
-      }
-      &.--disable{
-        pointer-events: none;
-        cursor: default;
-      }
+    &.--active{
+      border: 1px solid #{$orange};
+    }
+    &.--disable{
+      pointer-events: none;
+      cursor: default;
     }
   }
+  
 }
 
 
-.footer{  
+.footer{
+  margin-top: 50px;
   border-top: 1px solid #{$gray};
   &__content{
-    @include d-flex(row, nowrap, "", center);
-    height: 80px;
-    padding: 20px 0px;
+    @include d-flex(row, wrap, "", center);
+    padding: 20px 0;
   }
   @include hover("a", white, white);
   .logo{
     font-size: 2rem;
-    // line-height: 1;
+    margin-bottom: 10px;
   }
   &__copyright{
-    margin-left: 50px;
     color: white;
     font-size: .7rem;
   }
   &__nav{
-    @include d-flex(row, nowrap, center, center);
-    margin-left: auto;
-    margin-right: 20px;
+    @include d-flex(row, nowrap, flex-start, center);
+    width: 100%;
+    font-size: .8rem;
+    margin-bottom: 50px;
 
-    @include hover("a", white, #{$orange});
+    @include hover("a", rgba(255, 255, 255, 0.7), #{$orange});
     a{
-      margin: 0px 20px;
+      margin-right: 20px;
       transition: all .4s ease;
+      font-weight: 500;
     }
   }
   &--btn{
@@ -276,5 +268,104 @@
     background-color: #{$gray};
     color: white;
     line-height: 1;
+    margin-left: auto;
+  }
+
+  @include screen("Ipad"){
+      margin-top: 70px;
+    .logo{
+      font-size: 2rem;
+      margin-bottom: 0px;
+    }
+    &__content{
+      flex-wrap: nowrap;
+    }
+    &__copyright{
+      order: 2;
+      margin-left: 20px;
+    }
+    &__nav{
+      order: 3;
+      width: auto;
+      margin-bottom: 0;
+      margin-left: auto;
+    }
+    &--btn{
+      margin-left: 0;
+      order: 4;
+    }
+  }
+}
+
+.contact{
+  color: white;
+  &__title{
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+  }
+  &__form{
+    padding: 30px;
+    border: 1px solid #{$gray};
+    border-radius: .5rem;
+    margin-bottom: 20px;
+
+  }
+  &__input{
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  &__btn{
+    @extend %btn-clear;
+    @extend %border;
+    background-color: #{$gray};
+    color: white;
+    padding: .5rem 1rem;
+  }
+  .form-group{
+    margin-bottom: 20px;
+  }
+}
+.info{
+  color: white;
+  &__title{
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+  }
+  &__text{
+    margin-bottom: 30px;
+  }
+  @include hover("a", white, #{$orange});
+  &__phone{
+    display: block;
+    margin-bottom: 10px;
+    transition: all .4s ease;
+    
+  }
+  &__mail{
+    display: block;
+    margin-bottom: 10px;
+    transition: all .4s ease;
+  }
+  &__social{
+    list-style: none;
+    margin-bottom: 20px;
+
+    #fb{background-color: #3b5998;}
+    #tw{background-color: #1DA1F2;}
+    #wb{background-color: #FF9933;}
+    #ins{background-color: white; color: black;}
+    #tik{background-color: black;}
+    a{
+      display: inline-block;
+      width: 30px;
+      height: 30px;
+      line-height: 25px;
+      text-align: center;
+      border-radius: 50%;
+      margin-right: 10px;
+      &:hover{
+        color: inherit;
+      }
+    }
   }
 }

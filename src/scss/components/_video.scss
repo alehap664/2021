@@ -30,7 +30,6 @@
     &:hover{
       background-color: #{$orange};
     }
-
     svg{
       font-size: 1rem;
       @include screen("Ipad"){
@@ -38,9 +37,30 @@
       }
     }
   }
-
   &>*{
     margin: 0px 5px;
+  }
+
+  input[type=range] {
+    -webkit-appearance: none; /* Hides the slider so that custom slider can be made */
+    background: rgba(255, 165, 0, 0.5); /* Otherwise white in Chrome */
+    height: 2px !important;
+  }
+  
+  input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 15px;
+    width: 15px;
+    background: #{$orange};
+    border-radius: 50%;
+    
+    cursor: pointer;
+    box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+    
+  }
+  input[type=range]:focus {
+    outline: none; 
+    background: #{$orange};
   }
 }
 

@@ -14,10 +14,10 @@ const Card = ({to, title, categories, image, rate}) => {
           >{rate}</span>
         </div>
         <div className="card__content">
-          <h3 className="card__title"><Link to="#">{title}</Link></h3>
+          <h3 className="card__title"><Link to={to}>{title}</Link></h3>
           <div className="card__category">
             {categories.map( (ele, index) => (
-              <Link to="#" key={index} className="card__category__item">{ele}</Link>
+              <Link to={`/cinema/detail?page=1&categories=${ele.toLowerCase()}`} key={index} className="card__category__item">{ele}</Link>
             ))}
           </div>
         </div>
