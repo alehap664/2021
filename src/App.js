@@ -1,5 +1,5 @@
 import './App.scss';
-import {HashRouter as Router, Switch, Route , Redirect} from 'react-router-dom'
+import {BrowserRouter as Router, Switch, Route , Redirect} from 'react-router-dom'
 import Cinema from './components/Cinema/Cinema';
 import Admin from './components/Admin/Admin';
 import NotFound from './components/Notfound/Notfound';
